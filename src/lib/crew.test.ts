@@ -13,18 +13,18 @@ const ev = (id: string, organisers: string[]): ClubEvent => ({
 const events = [ev('a', ['Yeter', 'Baturay']), ev('b', ['Yeter']), ev('c', ['Yeter', 'Joel'])];
 
 describe('buildCrew', () => {
-  it('calls everyone without a listed role Organizer, in alphabetical order', () => {
+  it('calls everyone without a listed role Executive, in alphabetical order', () => {
     expect(buildCrew(events, []).map((c) => [c.name, c.role])).toEqual([
-      ['Baturay', 'Organizer'],
-      ['Joel', 'Organizer'],
-      ['Yeter', 'Organizer'],
+      ['Baturay', 'Executive'],
+      ['Joel', 'Executive'],
+      ['Yeter', 'Executive'],
     ]);
   });
 
   it('includes listed members who organise no activity, in alphabetical place', () => {
     const crew = buildCrew(events, [{ name: 'Özge' }]);
     expect(crew.map((c) => c.name)).toEqual(['Baturay', 'Joel', 'Özge', 'Yeter']);
-    expect(crew.find((c) => c.name === 'Özge')?.role).toBe('Organizer');
+    expect(crew.find((c) => c.name === 'Özge')?.role).toBe('Executive');
   });
 
   it('puts members with a role first, in the order they are listed', () => {
@@ -52,14 +52,28 @@ describe('buildCrew', () => {
 
   it('adds founder to the title of a founding member, who keeps their alphabetical place', () => {
     const crew = buildCrew(events, [
-      { name: 'Özlem', role: 'President' },
+      { name: 'Özlem', role: 'Executive Lead' },
       { name: 'Joel', founder: true },
     ]);
     expect(crew.map((c) => [c.name, c.role])).toEqual([
-      ['Özlem', 'President'],
-      ['Baturay', 'Organizer'],
-      ['Joel', 'Organizer & founder'],
-      ['Yeter', 'Organizer'],
+      ['Özlem', 'Executive Lead'],
+      ['Baturay', 'Executive'],
+      ['Joel', 'Executive & founder'],
+      ['Yeter', 'Executive'],
+    ]);
+  });
+
+  it('adds founder to an office too, and the office still puts them first', () => {
+    const crew = buildCrew(events, [
+      { name: 'Serdar', role: 'President', founder: true },
+      { name: 'Özlem', role: 'Executive Lead' },
+    ]);
+    expect(crew.map((c) => [c.name, c.role])).toEqual([
+      ['Serdar', 'President & founder'],
+      ['Özlem', 'Executive Lead'],
+      ['Baturay', 'Executive'],
+      ['Joel', 'Executive'],
+      ['Yeter', 'Executive'],
     ]);
   });
 

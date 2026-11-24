@@ -31,9 +31,9 @@ export interface CrewMember {
   name: string;
   /** name and surname, shown on the crew list */
   fullName?: string;
-  /** an office that puts them at the top of the crew list, e.g. President */
+  /** an office that puts them at the top of the crew list, e.g. President; everyone else is Executive */
   role?: string;
-  /** a founding member of the club: their title becomes "Organizer & founder" */
+  /** a founding member of the club: "& founder" is added to their title */
   founder?: boolean;
   /** path under /public, e.g. '/crew/ozlem.jpg' */
   photo?: string;
@@ -41,17 +41,17 @@ export interface CrewMember {
 
 /**
  * The crew list. Everyone organising an activity in the calendar is added automatically as
- * Organizer; list people here to show their full name, give them a role (President) or a photo, or
+ * Executive; list people here to show their full name, give them a role (President) or a photo, or
  * to show members who organise nothing this year. `name` must match the calendar's first name.
  * People with a role come first, in this order; everyone else is in alphabetical order.
  */
 export const crewMembers: CrewMember[] = [
-  { name: 'Özlem', fullName: 'Özlem Tatar', role: 'President', photo: '/crew/ozlem.jpg' },
+  { name: 'Serdar', fullName: 'Serdar Bilgiç', role: 'President', founder: true, photo: '/crew/serdar.jpg' },
+  { name: 'Özlem', fullName: 'Özlem Tatar', role: 'Executive Lead', photo: '/crew/ozlem.jpg' },
   { name: 'Baturay', fullName: 'Baturay Ofluoğlu', photo: '/crew/baturay.jpg' },
   { name: 'Beyza', fullName: 'Beyza Alabay', photo: '/crew/beyza.jpg' },
   { name: 'Joel', fullName: 'Joel Newburn', photo: '/crew/joel.jpg' },
   { name: 'John', fullName: 'John Hird' },
-  { name: 'Serdar', fullName: 'Serdar Bilgiç', founder: true, photo: '/crew/serdar.jpg' },
   { name: 'Sezen', fullName: 'Sezen Gürlek', photo: '/crew/sezen.jpg' },
   { name: 'Yeter', fullName: 'Yeter Gökburun Bilgiç', photo: '/crew/yeter.jpg' },
   { name: 'Özge', fullName: 'Özge Bozal', photo: '/crew/ozge.jpg' },

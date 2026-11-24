@@ -27,15 +27,16 @@ asks for less motion.
 | Waypoint positions on the 2027 chart | `src/data/places.ts` (one per `place` in the calendar) |
 | Site address (domain) | `siteUrl` in `src/data/club.ts` |
 
-The crew shown inside the boat is everyone named as an organiser in the calendar, plus the
-people listed in `crewMembers`, all titled Organizer. List someone there to give them another
-title (President) or a photo, or to show a member who organises nothing this year. People with
-a title come first, in list order; everyone else is in alphabetical order:
+The crew list is everyone named as an organiser in the calendar, plus the people listed in
+`crewMembers`, all titled Executive. List someone there to give them an office (President,
+Executive Lead) or a photo, or to show a member who organises nothing this year. People with an
+office come first, in list order; everyone else is in alphabetical order. `founder: true` adds
+"& founder" to the title:
 
 ```ts
 export const crewMembers = [
-  { name: 'Özlem', fullName: 'Özlem Tatar', role: 'President' },
-  { name: 'Serdar', fullName: 'Serdar Bilgiç', photo: '/crew/serdar.jpg' },
+  { name: 'Serdar', fullName: 'Serdar Bilgiç', role: 'President', founder: true },
+  { name: 'Özlem', fullName: 'Özlem Tatar', role: 'Executive Lead', photo: '/crew/ozlem.jpg' },
   { name: 'Özge', fullName: 'Özge Bozal' },
 ];
 ```

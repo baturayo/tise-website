@@ -146,7 +146,8 @@ export function Hero({ today, motion }: { today: string; motion: boolean }) {
       progress: 1,
       ease: 'none',
       onUpdate: () => place(voyage.progress),
-      scrollTrigger: { trigger: sectionEl, start: 'top top', end: '+=160%', pin: true, scrub: 0.8 },
+      // the whole voyage takes 0.64 screen heights of scrolling (was 1.6, sped up 2.5 times)
+      scrollTrigger: { trigger: sectionEl, start: 'top top', end: '+=64%', pin: true, scrub: 0.8 },
     });
     return () => {
       tween.scrollTrigger?.kill();

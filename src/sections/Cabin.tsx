@@ -76,7 +76,7 @@ export function Cabin() {
         <div className="crew" id="crew">
           <h3>The crew</h3>
           <p className="crew__note">
-            The people running the club and organising our activities in {calendarYear}. Above each photo, their
+            The people running the club and its activities in {calendarYear}. Above each photo, their
             first name is spelled in signal flags, read from the top.
           </p>
           <ul className="crew__list">

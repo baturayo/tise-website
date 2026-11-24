@@ -12,8 +12,8 @@ export interface CrewEntry {
 
 /**
  * Everyone on the crew list: the members listed in club.ts plus everyone organising an activity.
- * Members with a role (the president) come first in the order listed, then everyone else
- * alphabetically, as Organizer.
+ * Members with an office (President, Executive Lead) come first in the order listed, then everyone
+ * else alphabetically, as Executive. A founding member gets "& founder" after their title.
  */
 export function buildCrew(events: ClubEvent[], members: CrewMember[]): CrewEntry[] {
   const listed = new Map(members.map((m) => [m.name, m]));
@@ -21,7 +21,8 @@ export function buildCrew(events: ClubEvent[], members: CrewMember[]): CrewEntry
 
   const crew = names.map((name): CrewEntry => {
     const member = listed.get(name);
-    const role = member?.role ?? (member?.founder ? 'Organizer & founder' : 'Organizer');
+    const title = member?.role ?? 'Executive';
+    const role = member?.founder ? `${title} & founder` : title;
     const entry: CrewEntry = { name: member?.fullName ?? name, firstName: name, role };
     if (member?.photo) entry.photo = member.photo;
     return entry;
