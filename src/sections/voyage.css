@@ -1,0 +1,586 @@
+.voyage {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(6rem, 14vh, 9rem) 0;
+}
+
+/* chart grid: meridians and parallels */
+.voyage::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgb(255 255 255 / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+  background-size: 160px 160px;
+  background-position: center top;
+}
+
+.voyage__head {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 2rem clamp(2.5rem, 6vw, 5rem);
+}
+@media (min-width: 1000px) {
+  .voyage__head {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 34rem);
+    align-items: start;
+  }
+}
+.voyage__head h2 {
+  font-size: var(--step-3);
+}
+.voyage__intro > p {
+  margin-top: 1rem;
+  max-width: 34rem;
+  color: var(--mist);
+  font-size: var(--step-1);
+  line-height: 1.5;
+}
+
+/* ---------- subscribe ---------- */
+.subscribe {
+  padding: 1.25rem 1.4rem 1.35rem;
+  border: 1px solid rgb(255 255 255 / 0.2);
+  border-radius: 14px;
+  background: rgb(255 255 255 / 0.04);
+}
+.subscribe__title {
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+.subscribe__text {
+  margin-top: 0.2rem;
+  color: var(--mist);
+}
+.subscribe__buttons {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+.subscribe .btn {
+  justify-content: center;
+  font-size: 0.95rem;
+  min-height: 46px;
+  padding: 0.6rem 1.05rem;
+}
+@media (max-width: 560px) {
+  .subscribe {
+    padding: 1.1rem 1rem 1.2rem;
+  }
+  .subscribe .btn {
+    gap: 0.4rem;
+    padding: 0.6rem 0.45rem;
+    font-size: 0.88rem;
+  }
+}
+
+.subscribe__copy {
+  margin-top: 0.9rem;
+  display: flex;
+  gap: 0.6rem;
+}
+.subscribe__url {
+  flex: 1;
+  min-width: 0;
+  min-height: 46px;
+  padding: 0 0.9rem;
+  border: 1px solid rgb(255 255 255 / 0.25);
+  border-radius: 999px;
+  background: rgb(0 0 0 / 0.25);
+  color: var(--foam);
+  font: 500 0.9rem var(--font-body);
+}
+.subscribe__hint {
+  margin-top: 0.6rem;
+  font-size: var(--step--1);
+  color: var(--mist);
+}
+
+/* ---------- legend ---------- */
+.legend {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.4rem;
+  font-size: var(--step--1);
+  color: var(--mist);
+}
+.legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.legend__buoy.stop__buoy {
+  width: 12px;
+  height: 12px;
+  transform: none;
+}
+
+/* ---------- route ---------- */
+.route {
+  position: relative;
+  z-index: 1;
+  width: min(100% - 2 * var(--gutter), 70rem);
+  margin: clamp(3rem, 8vh, 5rem) auto 0;
+  padding: 2rem 0;
+}
+.route__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.route__ahead {
+  fill: none;
+  stroke: rgb(255 255 255 / 0.35);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 7;
+}
+.route__wake {
+  fill: none;
+  stroke: #ff7a3d;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+.route__anchor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  width: 30px;
+  color: rgb(255 255 255 / 0.75);
+  pointer-events: none;
+}
+.route__anchor svg {
+  display: block;
+  width: 100%;
+}
+.route__boat {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  width: 44px;
+  pointer-events: none;
+  will-change: transform;
+}
+/* turning to face the other way when the route changes direction: a tack */
+.route__hull {
+  position: relative;
+  transform-origin: 50% 82%;
+  transition: transform 0.5s cubic-bezier(0.45, 0, 0.25, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .route__hull {
+    transition: none;
+  }
+}
+/* rocking over the swell, around the keel */
+.route__rock {
+  position: relative;
+  transform-origin: 50% 82%;
+}
+.route__rock svg {
+  display: block;
+  width: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 2px 3px rgb(0 0 0 / 0.45));
+}
+/* the sea along the waterline, sliding back past the hull */
+.route__water {
+  position: absolute;
+  left: -32%;
+  right: -32%;
+  top: 87%;
+  height: 9px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 30%, #000 70%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 30%, #000 70%, transparent);
+}
+.route__water span {
+  position: absolute;
+  inset: 0 -16px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9' fill='none' stroke='white' stroke-width='1.2'%3E%3Cpath d='M0 3Q4 1 8 3T16 3' stroke-opacity='.9'/%3E%3Cpath d='M0 7Q4 5.4 8 7T16 7' stroke-opacity='.4'/%3E%3C/svg%3E")
+    repeat-x;
+  will-change: transform;
+}
+/* the wake behind the stern, only while moving */
+.route__stern-wake {
+  position: absolute;
+  right: 80%;
+  top: 79%;
+  width: 72%;
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+.route__stern-wake svg {
+  display: block;
+  width: 100%;
+}
+
+.route__stops {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: clamp(2.75rem, 7vh, 4.5rem);
+}
+
+/* ---------- a stop on the voyage ---------- */
+.stop {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 150px 1fr;
+  align-items: center;
+}
+
+.stop__month {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0 0 1rem;
+  padding-right: 1.5rem;
+  text-align: right;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--step-2);
+  color: rgb(255 255 255 / 0.6);
+}
+
+.stop__buoy {
+  --buoy: var(--gold);
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: center;
+  position: relative;
+  z-index: 2;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--buoy);
+  box-shadow: 0 0 0 2px #0e1b2c, 0 0 0 3.5px rgb(255 255 255 / 0.85);
+}
+.stop__buoy--sailing {
+  --buoy: #ffcc00;
+}
+.stop__buoy--learning {
+  --buoy: #3fc7d4;
+}
+.stop__buoy--social {
+  --buoy: #ff8fb1;
+}
+.stop__buoy--show {
+  --buoy: #ffb27a;
+}
+.stop__buoy--committee {
+  --buoy: #b9a7ff;
+}
+.stop--left .stop__buoy {
+  transform: translateX(-38px);
+}
+.stop--right .stop__buoy {
+  transform: translateX(38px);
+}
+
+.stop__body {
+  grid-row: 2;
+  max-width: 27rem;
+}
+.stop--left .stop__body {
+  grid-column: 1;
+  justify-self: end;
+  text-align: right;
+}
+.stop--right .stop__body {
+  grid-column: 3;
+  justify-self: start;
+}
+
+.stop__date {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.6rem;
+  font-size: var(--step--1);
+}
+.stop--left .stop__date,
+.stop--left .stop__meta {
+  justify-content: flex-end;
+}
+.stop__date time {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.stop__badge {
+  padding: 0.1rem 0.55rem;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 650;
+}
+.stop__badge--next,
+.stop__badge--now {
+  background: var(--gold);
+  color: var(--abyss);
+}
+.stop__badge--past {
+  border: 1px solid rgb(255 255 255 / 0.3);
+}
+
+.stop__title {
+  margin-top: 0.3rem;
+  font-size: clamp(1.3rem, 1.1rem + 0.8vw, 1.75rem);
+  line-height: 1.2;
+}
+
+.stop__meta {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.7rem;
+  font-size: var(--step--1);
+  color: var(--mist);
+}
+.stop__kind {
+  color: var(--foam);
+}
+.stop__kind::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 0.4rem;
+  border-radius: 50%;
+  vertical-align: 0.05em;
+  background: currentColor;
+}
+.stop__kind--sailing::before {
+  background: #ffcc00;
+}
+.stop__kind--learning::before {
+  background: #3fc7d4;
+}
+.stop__kind--social::before {
+  background: #ff8fb1;
+}
+.stop__kind--show::before {
+  background: #ffb27a;
+}
+.stop__kind--committee::before {
+  background: #b9a7ff;
+}
+
+.stop__coords {
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.03em;
+  color: rgb(255 255 255 / 0.6);
+}
+
+.stop__org {
+  margin-top: 0.3rem;
+  font-size: var(--step--1);
+  color: var(--mist);
+}
+
+.stop--past .stop__body {
+  opacity: 0.55;
+}
+.stop--past .stop__buoy {
+  background: transparent;
+}
+
+.stop--next .stop__body,
+.stop--now .stop__body {
+  padding: 1rem 1.2rem 1.1rem;
+  border: 1px solid rgb(255 204 0 / 0.55);
+  border-radius: 10px;
+  background: rgb(9 18 38 / 0.6);
+}
+.stop--next .stop__buoy::after,
+.stop--now .stop__buoy::after {
+  content: '';
+  position: absolute;
+  inset: -9px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold);
+}
+
+/* ---------- the sea chart under the plan ---------- */
+.chart {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* swell: engraved wave lines, drifting with the scroll */
+.sea {
+  --drift: 0;
+  position: absolute;
+  inset: 0;
+}
+.sea__row {
+  position: absolute;
+  left: -600px;
+  right: -600px;
+  height: 34px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='34' fill='none' stroke='white' stroke-width='1.1'%3E%3Cpath d='M0 14C30 14 58 12 80 5C102 12 130 14 160 14' stroke-opacity='.17'/%3E%3Cpath d='M0 20C30 20 58 18 80 11C102 18 130 20 160 20' stroke-opacity='.09'/%3E%3Cpath d='M0 26C30 26 58 24 80 17C102 24 130 26 160 26' stroke-opacity='.045'/%3E%3C/svg%3E")
+    repeat-x var(--phase) 0;
+  transform: translate3d(calc(var(--drift) * var(--dist)), 0, 0);
+  will-change: transform;
+}
+.sea__row--chop {
+  height: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='20' fill='none' stroke='white' stroke-width='1'%3E%3Cpath d='M0 10C18 10 34 9 48 5C62 9 78 10 96 10' stroke-opacity='.13'/%3E%3Cpath d='M0 15C18 15 34 14 48 10C62 14 78 15 96 15' stroke-opacity='.06'/%3E%3C/svg%3E");
+}
+
+/* compass roses, with their rhumb lines across the chart */
+.chart__rose {
+  position: absolute;
+  width: clamp(240px, 28vw, 400px);
+  overflow: visible;
+  opacity: 0.55;
+}
+.chart__rose--north {
+  top: 21%;
+  right: max(-6rem, (100% - 92rem) / 2);
+}
+.chart__rose--south {
+  top: 63%;
+  left: max(-7rem, (100% - 94rem) / 2);
+  transform: rotate(-8deg);
+}
+.rose__rhumbs line {
+  stroke: rgb(255 255 255 / 0.11);
+  stroke-width: 0.75;
+}
+.rose__ring circle,
+.rose__ring line {
+  fill: none;
+  stroke: rgb(255 255 255 / 0.5);
+  stroke-width: 0.6;
+}
+.rose__degrees text {
+  fill: rgb(255 255 255 / 0.55);
+  font: 500 6.5px var(--font-body);
+  text-anchor: middle;
+  letter-spacing: 0.04em;
+}
+.rose__degrees .rose__north {
+  font: italic 600 15px var(--font-display);
+  fill: var(--gold);
+}
+.rose__points path {
+  stroke: rgb(255 255 255 / 0.55);
+  stroke-width: 0.5;
+  stroke-linejoin: round;
+}
+.rose__light {
+  fill: rgb(255 255 255 / 0.5);
+}
+.rose__dark {
+  fill: rgb(10 20 40 / 0.6);
+}
+.rose__points circle {
+  fill: var(--gold);
+}
+
+/* the graduated border of a chart, down both sides */
+.chart__scale {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 7px;
+  border-inline: 1px solid rgb(255 255 255 / 0.3);
+  background: repeating-linear-gradient(180deg, rgb(255 255 255 / 0.3) 0 40px, transparent 40px 80px);
+}
+.chart__scale::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: repeating-linear-gradient(180deg, rgb(255 255 255 / 0.3) 0 1px, transparent 1px 8px);
+}
+.chart__scale--left {
+  left: clamp(10px, 1.4vw, 22px);
+}
+.chart__scale--left::after {
+  left: 100%;
+}
+.chart__scale--right {
+  right: clamp(10px, 1.4vw, 22px);
+}
+.chart__scale--right::after {
+  right: 100%;
+}
+
+@media (max-width: 760px) {
+  .chart__scale {
+    display: none;
+  }
+  .chart__rose--north {
+    right: -5.5rem;
+  }
+  .chart__rose--south {
+    left: -6rem;
+  }
+}
+
+/* ---------- phones: route down the left edge ---------- */
+@media (max-width: 760px) {
+  .route {
+    padding: 1rem 0;
+  }
+  .stop {
+    grid-template-columns: 40px 1fr;
+    column-gap: 0.9rem;
+  }
+  .stop__month {
+    grid-column: 1 / -1;
+    text-align: left;
+    margin-bottom: 0.6rem;
+    padding: 0 0 0 calc(40px + 0.9rem);
+  }
+  .stop__buoy,
+  .stop--left .stop__buoy,
+  .stop--right .stop__buoy {
+    grid-column: 1;
+    align-self: start;
+    margin-top: 0.2rem;
+    transform: none;
+  }
+  .stop--left .stop__buoy {
+    transform: translateX(-4px);
+  }
+  .stop--right .stop__buoy {
+    transform: translateX(4px);
+  }
+  .stop--left .stop__body,
+  .stop--right .stop__body {
+    grid-column: 2;
+    justify-self: stretch;
+    text-align: left;
+    max-width: none;
+  }
+  .stop--left .stop__date,
+  .stop--left .stop__meta {
+    justify-content: flex-start;
+  }
+  .route__boat {
+    width: 36px;
+  }
+}

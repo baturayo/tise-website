@@ -1,0 +1,299 @@
+.cabin {
+  position: relative;
+  background: linear-gradient(180deg, #0f1726 0%, #0f1726 70%, #0e1b2c 100%);
+}
+
+/* below deck at the chart table, fading in out of the dark */
+.cabin__window {
+  position: relative;
+  min-height: min(96svh, 900px);
+  display: flex;
+  align-items: flex-end;
+  padding: 0 0 clamp(2.5rem, 8vh, 5rem);
+}
+.cabin__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 0%;
+  /* quieter colours, so the course's training-chart stamp on the right stays in the background */
+  filter: brightness(0.85) saturate(0.55) sepia(0.15);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 62%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 62%, transparent 100%);
+}
+/* the shade sits above the photo and the words above the shade */
+.cabin__window::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background:
+    radial-gradient(60% 45% at 88% 72%, rgb(15 23 38 / 0.78), transparent 75%),
+    linear-gradient(90deg, rgb(15 23 38 / 0.88) 0%, rgb(15 23 38 / 0.66) 45%, rgb(15 23 38 / 0.12) 100%);
+}
+.cabin__window > .wrap {
+  position: relative;
+  z-index: 2;
+}
+
+.cabin__intro {
+  position: relative;
+  max-width: 40rem;
+}
+.cabin__intro h2 {
+  font-size: var(--step-3);
+  color: #fff;
+}
+.cabin__intro > p {
+  margin-top: 1rem;
+  font-size: var(--step-1);
+  line-height: 1.55;
+  color: rgb(255 255 255 / 0.88);
+}
+
+.cabin__facts {
+  margin: 1.75rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2.5rem;
+}
+.cabin__facts dt {
+  font-size: var(--step--1);
+  color: rgb(255 255 255 / 0.65);
+}
+.cabin__facts dd {
+  margin: 0.1rem 0 0;
+  font-weight: 600;
+}
+
+.cabin__inner {
+  padding: clamp(3rem, 8vh, 5rem) 0 clamp(5rem, 12vh, 8rem);
+}
+
+/* ---------- crew ---------- */
+.crew,
+.founders {
+  scroll-margin-top: calc(var(--nav-h) + 2rem);
+}
+.crew h3,
+.founders h3 {
+  font-size: var(--step-2);
+}
+.crew__note {
+  margin-top: 0.4rem;
+  color: var(--mist);
+}
+
+/*
+ * Each person under a signal hoist: their first name in code flags on a halyard that runs down to
+ * the photo. Hoists in a row hang from one line, so the photos below line up whatever the name's length.
+ */
+.crew__note {
+  max-width: 38rem;
+}
+.crew__list {
+  --flag: 2.1rem;
+  list-style: none;
+  margin: 2.5rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 12.5rem), 1fr));
+  column-gap: 2rem;
+}
+.crew__member {
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  margin-bottom: 2.75rem;
+}
+
+.hoist {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  padding: 0.85rem 0 1rem;
+}
+/* the halyard, from the line at the top down to the photo */
+.hoist::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  background: rgb(243 247 255 / 0.5);
+}
+.signal-flag {
+  display: block;
+  width: var(--flag);
+  height: auto;
+  aspect-ratio: 48 / 40;
+}
+.signal-flag__edge {
+  fill: none;
+  stroke: rgb(243 247 255 / 0.3);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.crew__photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 2px;
+  background: #1a2c52;
+}
+.crew__initial {
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 4.5rem);
+  font-weight: 400;
+  color: rgb(243 247 255 / 0.8);
+}
+
+.crew__caption {
+  padding-top: 0.75rem;
+}
+.crew__name {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+.crew__role {
+  margin-top: 0.15rem;
+  font-size: var(--step--1);
+  color: var(--mist);
+}
+
+@media (max-width: 560px) {
+  .crew__list {
+    --flag: 1.6rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1rem;
+  }
+  .crew__member {
+    margin-bottom: 2rem;
+  }
+  .crew__name {
+    font-size: 1.1rem;
+  }
+}
+
+/*
+ * ---------- founders: at half-mast ----------
+ * The crew's names fly close up, in colour. Here each founder's first name hangs in grey halfway
+ * down a halyard that runs the full height of the panel: the sea's sign of mourning.
+ */
+.founders {
+  --pad: clamp(1.75rem, 4vw, 2.75rem);
+  margin-top: clamp(4rem, 10vh, 6rem);
+  padding: var(--pad);
+  min-height: 22rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 2rem clamp(2rem, 5vw, 4rem);
+  border: 1px solid rgb(214 178 104 / 0.55);
+  border-radius: 4px;
+  background: #0a111e;
+  position: relative;
+  overflow: hidden;
+}
+.founders__head p {
+  margin-top: 0.5rem;
+  color: var(--mist);
+}
+.founders__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 2rem;
+}
+.founder {
+  position: relative;
+  padding-left: 1.1rem;
+}
+/* the halyard, from the top of the panel to the bottom */
+.founder::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: calc(-1 * var(--pad));
+  bottom: calc(-1 * var(--pad));
+  width: 1.5px;
+  background: rgb(243 247 255 / 0.35);
+}
+.hoist--half {
+  --flag: 2.1rem;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  padding: 0;
+  filter: grayscale(1);
+  opacity: 0.8;
+}
+.hoist--half::before {
+  content: none;
+}
+.founder__name {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 500;
+  line-height: 1.15;
+}
+.founder__years {
+  margin-top: 0.15rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--mist);
+}
+.founder__role {
+  margin-top: 0.6rem;
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: #e3c37f;
+}
+
+@media (max-width: 760px) {
+  .founders {
+    grid-template-columns: 1fr;
+  }
+  .founders__list {
+    grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+    gap: 1.25rem;
+  }
+  .founder {
+    min-height: 21rem;
+  }
+  .hoist--half {
+    --flag: 1.8rem;
+  }
+  .founder::before {
+    top: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .cabin__window {
+    min-height: 88svh;
+  }
+  .cabin__window::before {
+    background: linear-gradient(180deg, rgb(15 23 38 / 0.3) 0%, rgb(15 23 38 / 0.9) 65%);
+  }
+  .cabin__photo {
+    object-position: 70% 50%;
+  }
+  .cabin__intro > p {
+    font-size: var(--step-0);
+  }
+}

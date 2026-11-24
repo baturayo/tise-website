@@ -1,0 +1,19 @@
+# dependencies and build output
+node_modules
+dist
+*.tsbuildinfo
+
+# local working notes and logs (not part of the site)
+.superpowers
+docs/superpowers
+*.log
+
+# secrets and local settings: never commit
+.env
+.env.*
+.claude/settings.local.json
+*.pem
+*.key
+
+# OS clutter
+.DS_Store
