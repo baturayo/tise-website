@@ -13,7 +13,8 @@ export function Footer() {
         <div className="footer__brand">
           <Logo />
           <p>
-            A sailing club for people of every experience level, based in {club.city} since {club.founded}.
+            {club.shortName}, {club.fullName}: a sailing club for people of every experience level, based in {club.city}{' '}
+            since {club.founded}.
           </p>
         </div>
 

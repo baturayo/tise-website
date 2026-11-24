@@ -1,3 +1,4 @@
+import { ContactForm, contactFormReady } from '../components/ContactForm';
 import { club } from '../data/club';
 import { publicUrl } from '../lib/paths';
 import './harbour.css';
@@ -13,17 +14,22 @@ export function Harbour() {
         alt="A crew in sailing jackets on a Beneteau Oceanis 43 in choppy water"
         loading="lazy"
       />
-      <div className="harbour__inner wrap">
-        <h2 id="harbour-title">Come and sail with us</h2>
-        <p>
-          Never been on a boat, or already holding a skipper licence? There is a place for you on board. Join one of our
-          activities, meet the crew and try sailing.
-        </p>
-        <div className="harbour__actions">
-          <a className="btn btn--primary" href={club.instagram} target="_blank" rel="noopener noreferrer">
-            Message us on Instagram
-          </a>
+      <div className={`harbour__inner wrap${contactFormReady ? ' harbour__inner--form' : ''}`}>
+        <div className="harbour__text">
+          <h2 id="harbour-title">Come and sail with us</h2>
+          <p>
+            Never been on a boat, or already holding a skipper licence? There is a place for you on board. Join one of
+            our activities, meet the crew and try sailing.
+          </p>
+          {!contactFormReady && (
+            <div className="harbour__actions">
+              <a className="btn btn--primary" href={club.instagram} target="_blank" rel="noopener noreferrer">
+                Message us on Instagram
+              </a>
+            </div>
+          )}
         </div>
+        {contactFormReady && <ContactForm />}
       </div>
     </section>
   );

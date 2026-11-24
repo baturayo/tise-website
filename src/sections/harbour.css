@@ -38,7 +38,7 @@
   letter-spacing: -0.02em;
   color: #fff;
 }
-.harbour__inner > p {
+.harbour__text > p {
   margin-top: 1.25rem;
   max-width: 36rem;
   font-size: var(--step-1);
@@ -50,6 +50,101 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
+}
+
+/* with the contact form: words on the left, the form on the right */
+.harbour__inner--form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 27rem);
+  gap: 2.5rem clamp(2.5rem, 6vw, 5rem);
+  align-items: end;
+}
+@media (max-width: 860px) {
+  .harbour__inner--form {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.contact {
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  border-radius: 4px;
+  background: rgb(9 17 33 / 0.9);
+  border: 1px solid rgb(243 247 255 / 0.16);
+}
+.contact__field + .contact__field {
+  margin-top: 1rem;
+}
+.contact label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+.contact input,
+.contact textarea {
+  display: block;
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid rgb(243 247 255 / 0.3);
+  border-radius: 3px;
+  background: rgb(243 247 255 / 0.06);
+  color: var(--foam);
+  font: 400 var(--step-0) / 1.4 var(--font-body);
+}
+.contact textarea {
+  resize: vertical;
+  min-height: 7.5rem;
+}
+.contact textarea::placeholder {
+  color: rgb(243 247 255 / 0.5);
+}
+.contact input:focus-visible,
+.contact textarea:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+.contact [aria-invalid='true'] {
+  border-color: #ff9d8f;
+}
+.contact__error {
+  margin-top: 0.35rem;
+  font-size: var(--step--1);
+  color: #ffb3a8;
+}
+/* the bot trap: .contact input would otherwise show it */
+.contact .contact__trap {
+  display: none;
+}
+.contact__send {
+  margin-top: 1.25rem;
+  width: 100%;
+  justify-content: center;
+}
+.contact__send:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+.contact__status:not(:empty) {
+  margin-top: 0.75rem;
+  color: #ffb3a8;
+}
+.contact__note {
+  margin-top: 0.9rem;
+  font-size: var(--step--1);
+  color: var(--mist);
+}
+.contact__note a {
+  color: var(--foam);
+  font-weight: 600;
+}
+.contact--sent .contact__done {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+}
+.contact--sent p + p {
+  margin-top: 0.4rem;
+  color: var(--mist);
 }
 
 @media (max-width: 560px) {

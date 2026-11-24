@@ -242,7 +242,9 @@ export function Hero({ today, motion }: { today: string; motion: boolean }) {
 
         <div className="hero__copy">
           <h1 id="hero-title">{club.name}</h1>
-          <p className="hero__tag">Sailing together from Brussels since {club.founded}</p>
+          <p className="hero__tag">
+            {club.fullName}, sailing together from {club.city} since {club.founded}
+          </p>
           <p className="hero__lede">
             Weekends on the Belgian and Dutch coast, a summer flotilla in Türkiye, and good company ashore. Beginners and
             skippers alike.

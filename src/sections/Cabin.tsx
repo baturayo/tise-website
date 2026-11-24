@@ -50,6 +50,10 @@ export function Cabin() {
             <p>{club.intro}</p>
             <dl className="cabin__facts">
               <div>
+                <dt>{club.shortName} stands for</dt>
+                <dd>{club.fullName}</dd>
+              </div>
+              <div>
                 <dt>Home port</dt>
                 <dd>
                   {club.city}, {club.country}

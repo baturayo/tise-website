@@ -63,6 +63,19 @@ the "Follow the plan in your calendar" buttons (iPhone & Mac, Google Calendar, O
 plain download). Calendar apps re-check the feed every few hours, so after you change an
 activity and redeploy, subscribers see the change without doing anything.
 
+## Contact form
+
+The form in "Come and sail with us" sends messages by email through Web3Forms (free, 250 messages a
+month). Messages go to the inbox the access key was made for; that address never appears on the site.
+
+1. Get a key at https://web3forms.com: enter the inbox that should receive the messages, and the key
+   arrives by email.
+2. Add it to the repository as an Actions **variable** named `WEB3FORMS_KEY` (Settings → Secrets and
+   variables → Actions → Variables), then re-run the deploy. Web3Forms says the key may be public.
+3. To try the form locally, put `VITE_WEB3FORMS_KEY=<key>` in `.env.local` (git ignores it).
+
+Without a key the form stays hidden and the section shows the Instagram button instead.
+
 ## Publish
 
 The site is on GitHub Pages: https://baturayo.github.io/tise-website/

@@ -2,6 +2,8 @@
 export const club = {
   name: 'TISE Sailing Club',
   shortName: 'TISE',
+  /** what TISE stands for */
+  fullName: 'Turkish International Sailors Europe',
   city: 'Brussels',
   country: 'Belgium',
   founded: 2013,
