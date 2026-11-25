@@ -68,7 +68,7 @@ export function Footer() {
           © {new Date().getFullYear()} {club.name}
         </p>
         <p className="footer__credits">
-          Images and map data, resized, cropped or tinted for this site:{' '}
+          Photos, cropped and tinted for this site:{' '}
           {photoCredits.map((c, i) => (
             <span key={c.source}>
               {i > 0 && '; '}

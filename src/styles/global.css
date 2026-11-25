@@ -124,33 +124,9 @@ a {
 
 /* ---------- logo ---------- */
 .logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  text-decoration: none;
-}
-.logo__mark {
-  width: 44px;
-  height: 45px;
-  flex: none;
-}
-.logo__type {
-  display: flex;
-  flex-direction: column;
-  line-height: 1;
-}
-.logo__name {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 1.3rem;
-  letter-spacing: 0.06em;
-}
-.logo__sub {
-  font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  color: var(--mist);
-  margin-top: 0.2rem;
+  display: block;
+  width: auto;
+  height: 60px;
 }
 
 /* ---------- buttons ---------- */

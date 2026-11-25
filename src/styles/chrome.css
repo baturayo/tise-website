@@ -151,12 +151,6 @@
   }
 }
 
-@media (max-width: 720px) {
-  .logo__sub {
-    display: none;
-  }
-}
-
 /* small phones: the menu carries the call to action */
 @media (max-width: 359px) {
   .nav__cta {
