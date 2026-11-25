@@ -71,8 +71,11 @@ month). Messages go to the inbox the access key was made for; that address never
 
 1. Get a key at https://web3forms.com: enter the inbox that should receive the messages, and the key
    arrives by email.
-2. Add it to the repository as an Actions **variable** named `WEB3FORMS_KEY` (Settings → Secrets and
-   variables → Actions → Variables), then re-run the deploy. Web3Forms says the key may be public.
+2. Add it to the repository as an Actions **secret** named `WEB3FORMS_KEY` (Settings → Secrets and
+   variables → Actions → Secrets, or `gh secret set WEB3FORMS_KEY`), then re-run the deploy. The key
+   never goes in the code. The receiving address is kept by Web3Forms and appears nowhere on the
+   site; the key itself does end up in the published JavaScript, as with any browser form, but it
+   only lets people send messages to that inbox.
 3. To try the form locally, put `VITE_WEB3FORMS_KEY=<key>` in `.env.local` (git ignores it).
 
 Without a key the form stays hidden and the section shows the Instagram button instead.
