@@ -251,7 +251,7 @@ export function Hero({ today, motion }: { today: string; motion: boolean }) {
             skippers alike.
           </p>
           <div className="hero__actions">
-            <a className="btn btn--primary" href="#join">
+            <a className="btn btn--primary hero__cta" href="#join">
               Sail with us
             </a>
             {highlight && (
