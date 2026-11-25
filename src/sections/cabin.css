@@ -87,13 +87,14 @@
  */
 .crew__list {
   --mast: 2.7rem;
+  --mast-gap: 0.8rem;
   --flag: 1.75rem;
   list-style: none;
   margin: 2rem 0 0;
   padding: 0;
   display: grid;
   /* photos about 300px wide (18.65rem) on wider screens, the mast beside them */
-  grid-template-columns: repeat(auto-fill, minmax(0, calc(18.65rem + var(--mast))));
+  grid-template-columns: repeat(auto-fill, minmax(0, calc(18.65rem + var(--mast) + var(--mast-gap))));
   column-gap: 2rem;
 }
 .crew__member {
@@ -101,6 +102,7 @@
   grid-row: span 3;
   grid-template-rows: subgrid;
   grid-template-columns: var(--mast) minmax(0, 1fr);
+  column-gap: var(--mast-gap);
   margin-bottom: 3rem;
 }
 .crew__name {
@@ -118,11 +120,13 @@
   font-size: var(--step--1);
   color: var(--mist);
 }
-.crew__photo {
+.crew__card {
   grid-column: 2;
   grid-row: 3;
-  display: block;
   margin-top: 0.9rem;
+}
+.crew__photo {
+  display: block;
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
@@ -141,11 +145,11 @@
 /* ---------- the signal mast ---------- */
 .mast {
   --pole-x: 0.4rem;
-  --rise: 1.6rem; /* how far the mast stands above the photo */
+  --rise: 0rem; /* the masthead sits level with the top of the name */
   grid-column: 1;
-  grid-row: 3;
+  grid-row: 1 / span 3;
   position: relative;
-  margin-top: 0.9rem;
+  margin-top: 0.3rem;
 }
 /* the pole, in brushed metal */
 .mast::before {
@@ -191,10 +195,10 @@
 .mast__flags {
   position: absolute;
   left: calc(var(--pole-x) + 7px);
-  top: calc(-1 * var(--rise) + 0.35rem);
+  top: calc(-1 * var(--rise) + 0.55rem);
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 6px;
 }
 .signal-flag {
   display: block;
@@ -234,8 +238,9 @@
 @media (max-width: 560px) {
   .crew__list {
     --mast: 2.3rem;
+    --mast-gap: 0.6rem;
     --flag: 1.5rem;
-    grid-template-columns: minmax(0, calc(80% + var(--mast)));
+    grid-template-columns: minmax(0, calc(80% + var(--mast) + var(--mast-gap)));
   }
   .crew__member {
     margin-bottom: 2.75rem;
@@ -272,13 +277,16 @@
   grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
   gap: 2rem;
 }
+.founder__card {
+  --fold-bg: #0a111e; /* the panel's own dark, behind the folded corner */
+  max-width: 17rem;
+  margin-bottom: 1rem;
+}
 .founder__photo {
   display: block;
   width: 100%;
-  max-width: 17rem;
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  margin-bottom: 1rem;
   border-radius: 2px;
   filter: grayscale(1);
   background: #1a2c52;

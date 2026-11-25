@@ -8,6 +8,8 @@ export interface CrewEntry {
   firstName: string;
   role: string;
   photo?: string;
+  /** a few sentences about them, shown when their card is turned over */
+  bio?: string;
 }
 
 /**
@@ -25,6 +27,7 @@ export function buildCrew(events: ClubEvent[], members: CrewMember[]): CrewEntry
     const role = member?.founder ? `${title} & founder` : title;
     const entry: CrewEntry = { name: member?.fullName ?? name, firstName: name, role };
     if (member?.photo) entry.photo = member.photo;
+    if (member?.bio) entry.bio = member.bio;
     return entry;
   });
 

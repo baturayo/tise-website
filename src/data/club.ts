@@ -20,12 +20,26 @@ export interface Founder {
   role: string;
   /** path under /public; the photos come from the club's old website */
   photo?: string;
+  /** shown when their card is turned over; from the club's old website */
+  bio?: string;
 }
 
 /** "Legacy & remembrance": the founding members the club remembers (wording agreed with Serdar Bilgiç). */
 export const founders: Founder[] = [
-  { name: 'Aydın Erol', years: '1957–2017', role: 'Founding member', photo: '/founders/aydin-erol.jpg' },
-  { name: 'Ahmet Karaman', years: '1969–2022', role: 'Founding member', photo: '/founders/ahmet-karaman.jpg' },
+  {
+    name: 'Aydın Erol',
+    years: '1957–2017',
+    role: 'Founding member',
+    photo: '/founders/aydin-erol.jpg',
+    bio: 'We miss our founder and great friend Aydın Erol, who founded TISE Sailing Club with the support of a management board of Serdar Bilgiç, Ahmet Karaman, Yılmaz Özcan and Gürol Aydemir.',
+  },
+  {
+    name: 'Ahmet Karaman',
+    years: '1969–2022',
+    role: 'Founding member',
+    photo: '/founders/ahmet-karaman.jpg',
+    bio: 'Ahmet fell in love with sailing in 2008 in Göcek. He then gained his experience on frequent trips along the North Sea coast and in the Mediterranean with his TISE friends. He held an RYA Day Skipper licence, skippered TISE sailing activities and was well known for his advanced navigation skills. He also loved basketball and football, and worked for a global automotive company.',
+  },
 ];
 
 export interface CrewMember {
@@ -39,6 +53,8 @@ export interface CrewMember {
   founder?: boolean;
   /** path under /public, e.g. '/crew/ozlem.jpg' */
   photo?: string;
+  /** a few sentences about them, shown when their card is turned over */
+  bio?: string;
 }
 
 /**
@@ -48,7 +64,14 @@ export interface CrewMember {
  * People with a role come first, in this order; everyone else is in alphabetical order.
  */
 export const crewMembers: CrewMember[] = [
-  { name: 'Serdar', fullName: 'Serdar Bilgiç', role: 'President', founder: true, photo: '/crew/serdar.jpg' },
+  {
+    name: 'Serdar',
+    fullName: 'Serdar Bilgiç',
+    role: 'President',
+    founder: true,
+    photo: '/crew/serdar.jpg',
+    bio: "President and founding member of TISE Sailing Club. Serdar started his sailing adventure on Lac Léman in Geneva in 2001, and has since sailed with his TISE friends and family, mostly in the North Sea and the Mediterranean. He holds an RYA skipper licence and skippers most of TISE's sailing activities. He lives and works in Brussels.",
+  },
   { name: 'Özlem', fullName: 'Özlem Tatar', role: 'Executive Lead', photo: '/crew/ozlem.jpg' },
   { name: 'Baturay', fullName: 'Baturay Ofluoğlu', photo: '/crew/baturay.jpg' },
   { name: 'Beyza', fullName: 'Beyza Alabay', photo: '/crew/beyza.jpg' },

@@ -1,5 +1,6 @@
 import { events2027 } from '../data/calendar';
 import { club, crewMembers, founders } from '../data/club';
+import { ProfileCard } from '../components/ProfileCard';
 import { SignalFlag } from '../components/SignalFlag';
 import { buildCrew } from '../lib/crew';
 import { publicUrl } from '../lib/paths';
@@ -80,12 +81,14 @@ export function Cabin() {
         <div className="crew" id="crew">
           <h3>Club Management</h3>
           <ul className="crew__list">
-            {crew.map(({ name, firstName, role, photo }) => (
+            {crew.map(({ name, firstName, role, photo, bio }) => (
               <li className="crew__member" key={name}>
                 <p className="crew__name">{name}</p>
                 <p className="crew__role">{role}</p>
                 <SignalMast name={firstName} />
-                <Portrait name={name} photo={photo} />
+                <ProfileCard className="crew__card" name={name} callName={firstName} role={role} bio={bio} heading="Crew log">
+                  <Portrait name={name} photo={photo} />
+                </ProfileCard>
               </li>
             ))}
           </ul>
@@ -99,7 +102,19 @@ export function Cabin() {
           <ul className="founders__list">
             {founders.map((f) => (
               <li className="founder" key={f.name}>
-                {f.photo && <img className="founder__photo" src={publicUrl(f.photo)} alt="" loading="lazy" />}
+                {f.photo && (
+                  <ProfileCard
+                    className="founder__card"
+                    name={f.name}
+                    callName={f.name.split(' ')[0]}
+                    role={f.role}
+                    years={f.years}
+                    bio={f.bio}
+                    heading="In memory"
+                  >
+                    <img className="founder__photo" src={publicUrl(f.photo)} alt="" loading="lazy" />
+                  </ProfileCard>
+                )}
                 <p className="founder__name">{f.name}</p>
                 <p className="founder__years">{f.years}</p>
                 <p className="founder__role">{f.role}</p>

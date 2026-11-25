@@ -81,4 +81,10 @@ describe('buildCrew', () => {
     const crew = buildCrew(events, [{ name: 'Yeter', fullName: 'Yeter Gökburun Bilgiç' }]);
     expect(crew.find((c) => c.firstName === 'Yeter')?.name).toBe('Yeter Gökburun Bilgiç');
   });
+
+  it('carries a member\'s bio to the crew list, and leaves it out when there is none', () => {
+    const crew = buildCrew(events, [{ name: 'Joel', fullName: 'Joel Newburn', bio: 'Sails a lot.' }]);
+    expect(crew.find((c) => c.firstName === 'Joel')?.bio).toBe('Sails a lot.');
+    expect(crew.find((c) => c.firstName === 'Yeter')).not.toHaveProperty('bio');
+  });
 });
