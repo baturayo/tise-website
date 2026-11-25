@@ -7,7 +7,7 @@ export const club = {
   city: 'Brussels',
   country: 'Belgium',
   founded: 2013,
-  siteUrl: 'https://tise-sailing.club',
+  siteUrl: 'https://tisesailing.com',
   instagram: 'https://www.instagram.com/tise_sailing/',
   intro:
     'A Brussels sailing club for people of every experience level. We help newcomers get started and sailors build their skills through relaxed cruises and informal training, in a fun, safe and friendly crew.',
