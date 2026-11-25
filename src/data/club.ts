@@ -73,7 +73,12 @@ export const crewMembers: CrewMember[] = [
     bio: "President and founding member of TISE Sailing Club. Serdar started his sailing adventure on Lac Léman in Geneva in 2001, and has since sailed with his TISE friends and family, mostly in the North Sea and the Mediterranean. He holds an RYA skipper licence and skippers most of TISE's sailing activities. He lives and works in Brussels.",
   },
   { name: 'Özlem', fullName: 'Özlem Tatar', role: 'Executive Lead', photo: '/crew/ozlem.jpg' },
-  { name: 'Baturay', fullName: 'Baturay Ofluoğlu', photo: '/crew/baturay.jpg' },
+  {
+    name: 'Baturay',
+    fullName: 'Baturay Ofluoğlu',
+    photo: '/crew/baturay.jpg',
+    bio: 'Baturay started sailing in 2007 at Gökova Yelken Kulübü, in a Laser. He then joined İstanbul Yelken Kulübü, where he sailed Pirats and Lasers. From 2012 to 2016 he raced a First 40 and a J/80 in Istanbul. He has also sailed the Atlantic, on a passage from Gibraltar to Las Palmas in the Canary Islands. Since 2024 he has been an active member of TISE.',
+  },
   { name: 'Beyza', fullName: 'Beyza Alabay', photo: '/crew/beyza.jpg' },
   { name: 'Joel', fullName: 'Joel Newburn', photo: '/crew/joel.jpg' },
   { name: 'John', fullName: 'John Hird' },

@@ -7,6 +7,7 @@
   --ink: #13284f;
   --rule: 1.25rem;
   --fold: 1.6rem;
+  --margin: 2.35rem; /* the page's margin, where the flags hang */
   position: relative;
   perspective: 1400px;
 }
@@ -14,11 +15,18 @@
   display: grid;
   transform-style: preserve-3d;
 }
+.card__inner {
+  position: relative;
+}
 .card__front,
 .card__back {
-  grid-area: 1 / 1;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+}
+/* the page is exactly the size of the photo; a long entry scrolls */
+.card__back {
+  position: absolute;
+  inset: 0;
 }
 .card__front {
   position: relative;
@@ -42,7 +50,7 @@
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: thin;
-  padding: 0.9rem 1rem 1rem 1.55rem;
+  padding: 0.9rem 0.9rem 1rem calc(var(--margin) + 0.5rem);
   border-radius: 2px;
   color: var(--ink);
   font-size: 0.82rem;
@@ -50,7 +58,7 @@
   background-color: var(--paper);
   background-image:
     /* the margin line */
-    linear-gradient(90deg, transparent 1.05rem, rgb(206 68 39 / 0.55) 1.05rem, rgb(206 68 39 / 0.55) calc(1.05rem + 1px), transparent calc(1.05rem + 1px)),
+    linear-gradient(90deg, transparent var(--margin), rgb(206 68 39 / 0.55) var(--margin), rgb(206 68 39 / 0.55) calc(var(--margin) + 1px), transparent calc(var(--margin) + 1px)),
     /* the ruled lines, one per line of writing */
     repeating-linear-gradient(180deg, transparent 0 calc(var(--rule) - 1px), rgb(0 68 150 / 0.14) calc(var(--rule) - 1px) var(--rule));
   background-position: 0 0, 0 0.9rem;
@@ -75,19 +83,41 @@
 .card__bio {
   margin-top: var(--rule);
 }
-.card__signal {
-  margin-top: var(--rule);
+/* the halyard down the margin, and the flags clipped to it */
+.card__hoist {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0.5rem;
+  width: 1.2rem;
 }
-.card__flags {
+.card__hoist::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  background: rgb(19 40 79 / 0.45);
+}
+.card__hoist-flags {
+  position: absolute;
+  left: 0;
+  top: 0.9rem; /* close up, under the top of the page */
   display: flex;
-  gap: 3px;
+  flex-direction: column;
+  gap: 4px;
 }
-.card__flags .signal-flag {
-  --flag: 1.3rem;
+/* in remembrance the flags hang halfway down */
+.card__hoist--half .card__hoist-flags {
+  top: 50%;
+  filter: grayscale(1);
+  opacity: 0.85;
+}
+.card__hoist .signal-flag {
+  --flag: 1.15rem;
 }
 .card__phonetic {
-  display: block;
-  margin-top: 0.4rem;
   font-style: italic;
 }
 
