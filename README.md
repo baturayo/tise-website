@@ -89,10 +89,11 @@ transparent background:
 | `tise-logo-white.svg`, `tise-logo-white.png` | full logo with white lettering and hull, for dark backgrounds (the site footer) |
 | `tise-mark.svg`, `tise-mark-white.svg` | the boat alone, without lettering (the site menu bar) |
 
-The PNGs are 2000 px wide. Colours: blue `#004395`, wave `#2DD0FF`, flag red `#E30A17`, star
-gold `#FFCC00`. The ring on the sail has fifteen stars, as in the original. The lettering is set in
-Inter Black (TISE) and Montserrat SemiBold (the club's name), both under the SIL Open Font
-License, and is converted to outlines, so no font is needed to show the files.
+The PNGs are 2000 px wide. They are traced from the club's own artwork (a clean PNG of the logo)
+and keep its colours exactly: blue `#004496`, wave `#2BD1FF`, flag red `#CE4427`, star gold
+`#FFCA05`. The ring on the sail has fifteen stars. "TISE" is traced from the artwork (T, I and E
+squared up); the club's name is set in Copperplate Gothic Bold, the typeface of the original, and
+converted to outlines, so no font is needed to show the files.
 
 ## Publish
 

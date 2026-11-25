@@ -87,7 +87,8 @@
   margin: 2rem 0 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  /* photos about 300px wide (18.65rem) on wider screens, 80% of the width on phones */
+  grid-template-columns: repeat(auto-fill, minmax(0, 18.65rem));
   column-gap: 2rem;
 }
 .crew__member {
@@ -128,6 +129,9 @@
 }
 
 @media (max-width: 560px) {
+  .crew__list {
+    grid-template-columns: minmax(0, 80%);
+  }
   .crew__member {
     margin-bottom: 2.5rem;
   }
