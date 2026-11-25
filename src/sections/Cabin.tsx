@@ -1,4 +1,4 @@
-import { calendarYear, events2027 } from '../data/calendar';
+import { events2027 } from '../data/calendar';
 import { club, crewMembers, founders } from '../data/club';
 import { SignalFlag } from '../components/SignalFlag';
 import { buildCrew } from '../lib/crew';
@@ -74,19 +74,16 @@ export function Cabin() {
 
       <div className="cabin__inner wrap">
         <div className="crew" id="crew">
-          <h3>The crew</h3>
-          <p className="crew__note">
-            The people running the club and its activities in {calendarYear}. Above each photo, their
-            first name is spelled in signal flags, read from the top.
-          </p>
+          <h3>Club Management</h3>
           <ul className="crew__list">
             {crew.map(({ name, firstName, role, photo }) => (
               <li className="crew__member" key={name}>
-                <Hoist name={firstName} />
-                <Portrait name={name} photo={photo} />
-                <div className="crew__caption">
-                  <p className="crew__name">{name}</p>
-                  <p className="crew__role">{role}</p>
+                <p className="crew__name">{name}</p>
+                <p className="crew__role">{role}</p>
+                {/* the photo, with the first name hoisted in signal flags beside it */}
+                <div className="crew__frame">
+                  <Hoist name={firstName} />
+                  <Portrait name={name} photo={photo} />
                 </div>
               </li>
             ))}
@@ -102,9 +99,12 @@ export function Cabin() {
             {founders.map((f) => (
               <li className="founder" key={f.name}>
                 <Hoist name={f.name.split(' ')[0]} halfMast />
-                <p className="founder__name">{f.name}</p>
-                <p className="founder__years">{f.years}</p>
-                <p className="founder__role">{f.role}</p>
+                <div className="founder__body">
+                  {f.photo && <img className="founder__photo" src={publicUrl(f.photo)} alt="" loading="lazy" />}
+                  <p className="founder__name">{f.name}</p>
+                  <p className="founder__years">{f.years}</p>
+                  <p className="founder__role">{f.role}</p>
+                </div>
               </li>
             ))}
           </ul>

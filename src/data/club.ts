@@ -11,19 +11,21 @@ export const club = {
   instagram: 'https://www.instagram.com/tise_sailing/',
   intro:
     'A Brussels sailing club for people of every experience level. We help newcomers get started and sailors build their skills through relaxed cruises and informal training, in a fun, safe and friendly crew.',
-  waters: ['Belgian coast', 'Zeeland', 'Amsterdam', 'Türkiye'],
+  waters: ['Belgian coast', 'Zeeland', 'Amsterdam', 'Türkiye', 'Greece', 'Croatia', 'Mediterranean'],
 } as const;
 
 export interface Founder {
   name: string;
   years: string;
   role: string;
+  /** path under /public; the photos come from the club's old website */
+  photo?: string;
 }
 
 /** "Legacy & remembrance": the founding members the club remembers (wording agreed with Serdar Bilgiç). */
 export const founders: Founder[] = [
-  { name: 'Aydın Erol', years: '1957–2017', role: 'Founding member' },
-  { name: 'Ahmet Karaman', years: '1969–2022', role: 'Founding member' },
+  { name: 'Aydın Erol', years: '1957–2017', role: 'Founding member', photo: '/founders/aydin-erol.jpg' },
+  { name: 'Ahmet Karaman', years: '1969–2022', role: 'Founding member', photo: '/founders/ahmet-karaman.jpg' },
 ];
 
 export interface CrewMember {

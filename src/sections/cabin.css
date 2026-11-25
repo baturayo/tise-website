@@ -81,32 +81,43 @@
 .founders h3 {
   font-size: var(--step-2);
 }
-.crew__note {
-  margin-top: 0.4rem;
-  color: var(--mist);
-}
-
 /*
- * Each person under a signal hoist: their first name in code flags on a halyard that runs down to
- * the photo. Hoists in a row hang from one line, so the photos below line up whatever the name's length.
+ * Each person: name and title, then a large photo with their first name hoisted in code flags on a
+ * halyard down its left side. Rows line up (subgrid), whatever the length of a name.
  */
-.crew__note {
-  max-width: 38rem;
-}
 .crew__list {
   --flag: 2.1rem;
   list-style: none;
-  margin: 2.5rem 0 0;
+  margin: 2rem 0 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 12.5rem), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
   column-gap: 2rem;
 }
 .crew__member {
   display: grid;
   grid-row: span 3;
   grid-template-rows: subgrid;
-  margin-bottom: 2.75rem;
+  margin-bottom: 3rem;
+}
+.crew__name {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 500;
+  line-height: 1.2;
+  text-wrap: balance;
+  align-self: end;
+}
+.crew__role {
+  margin-top: 0.15rem;
+  font-size: var(--step--1);
+  color: var(--mist);
+}
+.crew__frame {
+  margin-top: 0.9rem;
+  display: grid;
+  grid-template-columns: var(--flag) minmax(0, 1fr);
+  column-gap: 0.7rem;
 }
 
 .hoist {
@@ -115,9 +126,9 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 3px;
-  padding: 0.85rem 0 1rem;
+  padding: 0.6rem 0 1rem;
 }
-/* the halyard, from the line at the top down to the photo */
+/* the halyard, running the height of the photo */
 .hoist::before {
   content: '';
   position: absolute;
@@ -128,6 +139,7 @@
   background: rgb(243 247 255 / 0.5);
 }
 .signal-flag {
+  position: relative;
   display: block;
   width: var(--flag);
   height: auto;
@@ -143,7 +155,7 @@
 .crew__photo {
   display: block;
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
   border-radius: 2px;
   background: #1a2c52;
@@ -152,38 +164,20 @@
   display: grid;
   place-items: center;
   font-family: var(--font-display);
-  font-size: clamp(3rem, 7vw, 4.5rem);
+  font-size: clamp(4rem, 9vw, 6rem);
   font-weight: 400;
   color: rgb(243 247 255 / 0.8);
 }
 
-.crew__caption {
-  padding-top: 0.75rem;
-}
-.crew__name {
-  font-family: var(--font-display);
-  font-size: 1.3rem;
-  font-weight: 500;
-  line-height: 1.2;
-  text-wrap: balance;
-}
-.crew__role {
-  margin-top: 0.15rem;
-  font-size: var(--step--1);
-  color: var(--mist);
-}
-
 @media (max-width: 560px) {
   .crew__list {
-    --flag: 1.6rem;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 1rem;
+    --flag: 1.8rem;
   }
   .crew__member {
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
   }
   .crew__name {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
   }
 }
 
@@ -219,8 +213,26 @@
   gap: 2rem;
 }
 .founder {
+  --flag: 2.1rem;
   position: relative;
-  padding-left: 1.1rem;
+  display: grid;
+  grid-template-columns: var(--flag) minmax(0, 1fr);
+  column-gap: 0.8rem;
+}
+.founder__body {
+  grid-column: 2;
+}
+/* in black and white, like the grey flags at half-mast */
+.founder__photo {
+  display: block;
+  width: 100%;
+  max-width: 17rem;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border-radius: 2px;
+  filter: grayscale(1);
+  background: #1a2c52;
 }
 /* the halyard, from the top of the panel to the bottom */
 .founder::before {
@@ -233,7 +245,6 @@
   background: rgb(243 247 255 / 0.35);
 }
 .hoist--half {
-  --flag: 2.1rem;
   position: absolute;
   left: 0;
   top: 50%;
@@ -273,10 +284,8 @@
     gap: 1.25rem;
   }
   .founder {
-    min-height: 21rem;
-  }
-  .hoist--half {
-    --flag: 1.8rem;
+    --flag: 1.6rem;
+    column-gap: 0.6rem;
   }
   .founder::before {
     top: 0;
