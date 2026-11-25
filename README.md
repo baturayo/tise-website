@@ -43,9 +43,7 @@ export const crewMembers = [
 
 `name` is the first name used for organisers in the calendar; `fullName` is what the crew list shows.
 
-Above each photo the person's first name is spelled in International Code of Signals flags
-(`src/components/SignalFlag.tsx`, letters from `src/lib/signal.ts`). Turkish letters fly as their
-plain flag (Ö as O, Ç as C, Ğ as G, Ş as S, Ü as U, ı and İ as I). Photos are square; 480 px is plenty.
+Photos are shown at 4:5 (portrait); 640 × 800 px is plenty.
 
 ## Photos and the chart
 

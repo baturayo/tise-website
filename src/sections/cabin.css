@@ -81,12 +81,8 @@
 .founders h3 {
   font-size: var(--step-2);
 }
-/*
- * Each person: name and title, then a large photo with their first name hoisted in code flags on a
- * halyard down its left side. Rows line up (subgrid), whatever the length of a name.
- */
+/* Each person: name and title, then a large photo. Rows line up (subgrid), whatever the length of a name. */
 .crew__list {
-  --flag: 2.1rem;
   list-style: none;
   margin: 2rem 0 0;
   padding: 0;
@@ -113,47 +109,9 @@
   font-size: var(--step--1);
   color: var(--mist);
 }
-.crew__frame {
-  margin-top: 0.9rem;
-  display: grid;
-  grid-template-columns: var(--flag) minmax(0, 1fr);
-  column-gap: 0.7rem;
-}
-
-.hoist {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 3px;
-  padding: 0.6rem 0 1rem;
-}
-/* the halyard, running the height of the photo */
-.hoist::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 1.5px;
-  background: rgb(243 247 255 / 0.5);
-}
-.signal-flag {
-  position: relative;
-  display: block;
-  width: var(--flag);
-  height: auto;
-  aspect-ratio: 48 / 40;
-}
-.signal-flag__edge {
-  fill: none;
-  stroke: rgb(243 247 255 / 0.3);
-  stroke-width: 1;
-  vector-effect: non-scaling-stroke;
-}
-
 .crew__photo {
   display: block;
+  margin-top: 0.9rem;
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
@@ -170,9 +128,6 @@
 }
 
 @media (max-width: 560px) {
-  .crew__list {
-    --flag: 1.8rem;
-  }
   .crew__member {
     margin-bottom: 2.5rem;
   }
@@ -181,11 +136,7 @@
   }
 }
 
-/*
- * ---------- founders: at half-mast ----------
- * The crew's names fly close up, in colour. Here each founder's first name hangs in grey halfway
- * down a halyard that runs the full height of the panel: the sea's sign of mourning.
- */
+/* ---------- founders ---------- */
 .founders {
   --pad: clamp(1.75rem, 4vw, 2.75rem);
   margin-top: clamp(4rem, 10vh, 6rem);
@@ -212,17 +163,6 @@
   grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
   gap: 2rem;
 }
-.founder {
-  --flag: 2.1rem;
-  position: relative;
-  display: grid;
-  grid-template-columns: var(--flag) minmax(0, 1fr);
-  column-gap: 0.8rem;
-}
-.founder__body {
-  grid-column: 2;
-}
-/* in black and white, like the grey flags at half-mast */
 .founder__photo {
   display: block;
   width: 100%;
@@ -233,27 +173,6 @@
   border-radius: 2px;
   filter: grayscale(1);
   background: #1a2c52;
-}
-/* the halyard, from the top of the panel to the bottom */
-.founder::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: calc(-1 * var(--pad));
-  bottom: calc(-1 * var(--pad));
-  width: 1.5px;
-  background: rgb(243 247 255 / 0.35);
-}
-.hoist--half {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  padding: 0;
-  filter: grayscale(1);
-  opacity: 0.8;
-}
-.hoist--half::before {
-  content: none;
 }
 .founder__name {
   font-family: var(--font-display);
@@ -282,13 +201,6 @@
   .founders__list {
     grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
     gap: 1.25rem;
-  }
-  .founder {
-    --flag: 1.6rem;
-    column-gap: 0.6rem;
-  }
-  .founder::before {
-    top: 0;
   }
 }
 

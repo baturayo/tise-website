@@ -1,25 +1,8 @@
 import { events2027 } from '../data/calendar';
 import { club, crewMembers, founders } from '../data/club';
-import { SignalFlag } from '../components/SignalFlag';
 import { buildCrew } from '../lib/crew';
 import { publicUrl } from '../lib/paths';
-import { phonetic, signalLetters } from '../lib/signal';
 import './cabin.css';
-
-/** The first name hoisted in code flags, read from the top, as a boat signals. */
-function Hoist({ name, halfMast = false }: { name: string; halfMast?: boolean }) {
-  const letters = signalLetters(name);
-  return (
-    <div
-      className={halfMast ? 'hoist hoist--half' : 'hoist'}
-      title={`${name} in signal flags${halfMast ? ', at half-mast' : ''}: ${phonetic(letters)}`}
-    >
-      {letters.map((l, i) => (
-        <SignalFlag key={i} letter={l} />
-      ))}
-    </div>
-  );
-}
 
 function Portrait({ name, photo }: { name: string; photo?: string }) {
   return photo ? (
@@ -76,15 +59,11 @@ export function Cabin() {
         <div className="crew" id="crew">
           <h3>Club Management</h3>
           <ul className="crew__list">
-            {crew.map(({ name, firstName, role, photo }) => (
+            {crew.map(({ name, role, photo }) => (
               <li className="crew__member" key={name}>
                 <p className="crew__name">{name}</p>
                 <p className="crew__role">{role}</p>
-                {/* the photo, with the first name hoisted in signal flags beside it */}
-                <div className="crew__frame">
-                  <Hoist name={firstName} />
-                  <Portrait name={name} photo={photo} />
-                </div>
+                <Portrait name={name} photo={photo} />
               </li>
             ))}
           </ul>
@@ -93,18 +72,15 @@ export function Cabin() {
         <aside className="founders" id="founders" aria-labelledby="founders-title">
           <div className="founders__head">
             <h3 id="founders-title">Legacy &amp; remembrance</h3>
-            <p>Founding members of TISE, in loving memory. Their names fly at half-mast.</p>
+            <p>Founding members of TISE, in loving memory.</p>
           </div>
           <ul className="founders__list">
             {founders.map((f) => (
               <li className="founder" key={f.name}>
-                <Hoist name={f.name.split(' ')[0]} halfMast />
-                <div className="founder__body">
-                  {f.photo && <img className="founder__photo" src={publicUrl(f.photo)} alt="" loading="lazy" />}
-                  <p className="founder__name">{f.name}</p>
-                  <p className="founder__years">{f.years}</p>
-                  <p className="founder__role">{f.role}</p>
-                </div>
+                {f.photo && <img className="founder__photo" src={publicUrl(f.photo)} alt="" loading="lazy" />}
+                <p className="founder__name">{f.name}</p>
+                <p className="founder__years">{f.years}</p>
+                <p className="founder__role">{f.role}</p>
               </li>
             ))}
           </ul>
