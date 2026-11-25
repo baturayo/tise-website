@@ -1,4 +1,4 @@
-import { useId, useState, type ReactNode } from 'react';
+import { useId, useState, type CSSProperties, type ReactNode } from 'react';
 import { phonetic, signalLetters } from '../lib/signal';
 import { SignalFlag } from './SignalFlag';
 import './profile-card.css';
@@ -42,7 +42,9 @@ export function ProfileCard({ name, callName, role, years, bio, heading, halfMas
           >
             <span className="card__hoist-flags">
               {letters.map((l, i) => (
-                <SignalFlag key={i} letter={l} />
+                <span key={i} className="card__flag" style={{ '--i': i } as CSSProperties}>
+                  <SignalFlag letter={l} />
+                </span>
               ))}
             </span>
           </div>

@@ -153,6 +153,12 @@
     font-size: 1.3rem;
   }
 }
+/* the smallest phones: the full width, so a long log entry still fits the page */
+@media (max-width: 340px) {
+  .crew__list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
 
 /* ---------- founders ---------- */
 .founders {
@@ -178,7 +184,8 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  /* side by side only when each photo is wide enough to carry its log page */
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
   gap: 2rem;
 }
 .founder__card {
@@ -224,7 +231,6 @@
     grid-template-columns: 1fr;
   }
   .founders__list {
-    grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
     gap: 1.25rem;
   }
 }

@@ -85,9 +85,10 @@ transparent background:
 
 | File | Use |
 | --- | --- |
-| `tise-logo.svg`, `tise-logo.png` | full logo in its own colours, for light backgrounds |
-| `tise-logo-white.svg`, `tise-logo-white.png` | full logo with white lettering and hull, for dark backgrounds (the site footer) |
-| `tise-mark.svg`, `tise-mark-white.svg` | the boat alone, without lettering (the site menu bar) |
+| `tise-logo.svg`, `tise-logo.png` | full logo in its own colours, for light backgrounds (the site footer, on a white badge) |
+| `tise-logo-white.svg`, `tise-logo-white.png` | full logo with white lettering and hull, for dark backgrounds |
+| `tise-logo-compact.svg` | the boat and "TISE", without the club's name (the site menu bar, on a white badge) |
+| `tise-mark.svg`, `tise-mark-white.svg` | the boat alone, without lettering (the browser-tab icon) |
 
 The PNGs are 2000 px wide. They are traced from the club's own artwork (a clean PNG of the logo)
 and keep its colours exactly: blue `#004496`, wave `#2BD1FF`, flag red `#CE4427`, star gold
@@ -95,9 +96,13 @@ and keep its colours exactly: blue `#004496`, wave `#2BD1FF`, flag red `#CE4427`
 squared up); the club's name is set in Copperplate Gothic Bold, the typeface of the original, and
 converted to outlines, so no font is needed to show the files.
 
+`public/og-image.png` is the picture shown when a link to the site is shared (WhatsApp, iMessage,
+LinkedIn and so on): `tise-logo.svg`, unchanged, centred on white at 1200 × 630.
+
 ## Publish
 
-The site is on GitHub Pages: https://baturayo.github.io/tise-website/
+The site is on GitHub Pages, at https://tisesailing.com (the domain is registered at GoDaddy; its
+DNS points at GitHub Pages).
 
 Every push to `main` runs `.github/workflows/deploy.yml`, which runs the tests, builds the site and
 publishes `dist/`. Follow it under the repository's Actions tab; nothing needs installing.

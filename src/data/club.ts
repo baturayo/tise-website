@@ -72,7 +72,13 @@ export const crewMembers: CrewMember[] = [
     photo: '/crew/serdar.jpg',
     bio: "President and founding member of TISE Sailing Club. Serdar started his sailing adventure on Lac Léman in Geneva in 2001, and has since sailed with his TISE friends and family, mostly in the North Sea and the Mediterranean. He holds an RYA skipper licence and skippers most of TISE's sailing activities. He lives and works in Brussels.",
   },
-  { name: 'Özlem', fullName: 'Özlem Tatar', role: 'Executive Lead', photo: '/crew/ozlem.jpg' },
+  {
+    name: 'Özlem',
+    fullName: 'Özlem Tatar',
+    role: 'Executive Lead',
+    photo: '/crew/ozlem.jpg',
+    bio: "Özlem's sailing journey began in Dubai in 2015, where she earned her RYA Skipper certificate. She then spent nearly a decade racing and sailing with various crews, including the all-female Team Ladies First, and taking on multiple roles on board. In 2025 she moved to Brussels and rediscovered her passion for sailing through TISE. Now she's ready for her next adventure: helping steer our TISE community towards new horizons.",
+  },
   {
     name: 'Baturay',
     fullName: 'Baturay Ofluoğlu',
@@ -80,7 +86,12 @@ export const crewMembers: CrewMember[] = [
     bio: 'Baturay started sailing in 2007 at Gökova Yelken Kulübü, in a Laser. He then joined İstanbul Yelken Kulübü, where he sailed Pirats and Lasers. From 2012 to 2016 he raced a First 40 and a J/80 in Istanbul. He has also sailed the Atlantic, on a passage from Gibraltar to Las Palmas in the Canary Islands. Since 2024 he has been an active member of TISE. Ashore, he is an entrepreneur and AI consultant, and lives in Belgium.',
   },
   { name: 'Beyza', fullName: 'Beyza Alabay', photo: '/crew/beyza.jpg' },
-  { name: 'Joel', fullName: 'Joel Newburn', photo: '/crew/joel.jpg' },
+  {
+    name: 'Joel',
+    fullName: 'Joel Newburn',
+    photo: '/crew/joel.jpg',
+    bio: 'Joel started sailing in 2021, learning the sheets on an RYA Competent Crew course on the Baltic Sea, and has since progressed through Day Skipper to Coastal Skipper. He and his family usually charter in the Mediterranean, and are building up experience and shopping for a boat to live aboard in the coming years. He lives in the suburbs of Brussels.',
+  },
   { name: 'John', fullName: 'John Hird' },
   { name: 'Sezen', fullName: 'Sezen Gürlek', photo: '/crew/sezen.jpg' },
   { name: 'Yeter', fullName: 'Yeter Gökburun Bilgiç', photo: '/crew/yeter.jpg' },

@@ -117,6 +117,11 @@
 .card__hoist .signal-flag {
   --flag: 1.15rem;
 }
+/* each flag is bent on to the halyard at its hoist edge, so the fly is the end that moves */
+.card__flag {
+  display: block;
+  transform-origin: 0 50%;
+}
 .card__phonetic {
   font-style: italic;
 }
@@ -133,6 +138,77 @@
 @media (prefers-reduced-motion: no-preference) and (hover: hover) {
   .card:hover .card__inner {
     transform: rotateY(180deg);
+  }
+}
+
+/*
+ * As the page comes round, the name is run up the halyard and flies in the wind. In remembrance it
+ * goes right up first and is then lowered to half-mast, as a flag is at sea. Once the animation ends
+ * the flags rest where it left them, so nothing jumps while the card turns back.
+ */
+@keyframes card-hoist {
+  from {
+    top: 100%;
+    transform: translateY(-100%);
+  }
+  to {
+    top: 0.9rem;
+    transform: translateY(0);
+  }
+}
+@keyframes card-hoist-half {
+  0% {
+    top: 100%;
+    transform: translateY(-100%);
+  }
+  50%,
+  64% {
+    top: 0.9rem;
+    transform: translateY(0);
+  }
+  100% {
+    top: 50%;
+    transform: translateY(0);
+  }
+}
+@keyframes card-flutter {
+  0%,
+  100% {
+    transform: skewY(0deg) scaleX(1);
+  }
+  30% {
+    transform: skewY(-6deg) scaleX(0.93);
+  }
+  65% {
+    transform: skewY(3deg) scaleX(0.98);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .card[data-turned] .card__hoist-flags {
+    animation: card-hoist 0.9s cubic-bezier(0.3, 0.7, 0.3, 1) 0.3s both;
+  }
+  .card[data-turned] .card__hoist--half .card__hoist-flags {
+    animation: card-hoist-half 2.4s ease-in-out 0.3s both;
+  }
+  .card[data-turned] .card__flag {
+    animation: card-flutter 2.2s ease-in-out calc(var(--i) * -0.3s) infinite;
+  }
+  .card[data-turned] .card__hoist--half .card__flag {
+    animation-duration: 3.4s;
+  }
+}
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .card:hover .card__hoist-flags {
+    animation: card-hoist 0.9s cubic-bezier(0.3, 0.7, 0.3, 1) 0.3s both;
+  }
+  .card:hover .card__hoist--half .card__hoist-flags {
+    animation: card-hoist-half 2.4s ease-in-out 0.3s both;
+  }
+  .card:hover .card__flag {
+    animation: card-flutter 2.2s ease-in-out calc(var(--i) * -0.3s) infinite;
+  }
+  .card:hover .card__hoist--half .card__flag {
+    animation-duration: 3.4s;
   }
 }
 /* without motion the page simply appears */
@@ -190,5 +266,16 @@
     padding-top: 0.75rem;
     padding-bottom: 0.6rem;
     font-size: 0.8rem;
+  }
+}
+/* the narrowest phones: smaller writing and a narrower margin, so the longest entries still fit */
+@media (max-width: 400px) {
+  .card {
+    --margin: 2.15rem;
+  }
+  .card__back {
+    --rule: 1.15rem;
+    padding: 0.6rem 0.7rem 0.5rem calc(var(--margin) + 0.35rem);
+    font-size: 0.76rem;
   }
 }
