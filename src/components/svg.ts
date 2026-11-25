@@ -9,11 +9,3 @@ export function starPath(cx: number, cy: number, r: number): string {
   }
   return `M${pts.join('L')}Z`;
 }
-
-/** The European ring: n points evenly spaced on a circle, starting at 12 o'clock. */
-export function ring(cx: number, cy: number, radius: number, n = 12): Array<[number, number]> {
-  return Array.from({ length: n }, (_, i) => {
-    const a = -Math.PI / 2 + (i * 2 * Math.PI) / n;
-    return [cx + radius * Math.cos(a), cy + radius * Math.sin(a)];
-  });
-}

@@ -77,6 +77,22 @@ month). Messages go to the inbox the access key was made for; that address never
 
 Without a key the form stays hidden and the section shows the Instagram button instead.
 
+## Logo
+
+The club logo, redrawn as vectors from the original artwork, is in `public/brand/`, on a
+transparent background:
+
+| File | Use |
+| --- | --- |
+| `tise-logo.svg`, `tise-logo.png` | full logo in its own colours, for light backgrounds |
+| `tise-logo-white.svg`, `tise-logo-white.png` | full logo with white lettering and hull, for dark backgrounds (the site footer) |
+| `tise-mark.svg`, `tise-mark-white.svg` | the boat alone, without lettering (the site menu bar) |
+
+The PNGs are 2000 px wide. Colours: blue `#004395`, wave `#2DD0FF`, flag red `#E30A17`, star
+gold `#FFCC00`. The ring on the sail has fifteen stars, as in the original. The lettering is set in
+Inter Black (TISE) and Montserrat SemiBold (the club's name), both under the SIL Open Font
+License, and is converted to outlines, so no font is needed to show the files.
+
 ## Publish
 
 The site is on GitHub Pages: https://baturayo.github.io/tise-website/

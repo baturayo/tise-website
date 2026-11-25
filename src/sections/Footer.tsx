@@ -1,4 +1,4 @@
-import { Logo } from '../components/Logo';
+import { LogoFull } from '../components/Logo';
 import { navItems } from '../components/Nav';
 import { calendarYear } from '../data/calendar';
 import { club } from '../data/club';
@@ -11,7 +11,7 @@ export function Footer() {
     <footer className="footer" id="contact">
       <div className="footer__grid wrap">
         <div className="footer__brand">
-          <Logo />
+          <LogoFull className="footer__logo" />
           <p>
             {club.shortName}, {club.fullName}: a sailing club for people of every experience level, based in {club.city}{' '}
             since {club.founded}.

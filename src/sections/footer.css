@@ -14,6 +14,11 @@
 .footer__brand {
   color: var(--foam);
 }
+.footer__logo {
+  display: block;
+  width: 10rem;
+  height: auto;
+}
 .footer__brand p {
   margin-top: 1rem;
   max-width: 22rem;
