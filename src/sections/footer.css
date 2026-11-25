@@ -16,8 +16,12 @@
 }
 .footer__logo {
   display: block;
-  width: 10rem;
+  box-sizing: border-box;
+  width: 12rem;
   height: auto;
+  padding: 1rem 1.1rem;
+  border-radius: 12px;
+  background: #fff;
 }
 .footer__brand p {
   margin-top: 1rem;

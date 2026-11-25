@@ -1,8 +1,29 @@
 import { events2027 } from '../data/calendar';
 import { club, crewMembers, founders } from '../data/club';
+import { SignalFlag } from '../components/SignalFlag';
 import { buildCrew } from '../lib/crew';
 import { publicUrl } from '../lib/paths';
+import { phonetic, signalLetters } from '../lib/signal';
 import './cabin.css';
+
+/**
+ * A small signal mast beside each photo: a pole with a brass truck at the top, the halyard running down
+ * beside it to a cleat, and the person's first name hoisted close up in code flags, read from the top.
+ */
+function SignalMast({ name }: { name: string }) {
+  const letters = signalLetters(name);
+  return (
+    <div className="mast" title={`${name} in signal flags: ${phonetic(letters)}`}>
+      <span className="mast__halyard" aria-hidden="true" />
+      <span className="mast__cleat" aria-hidden="true" />
+      <div className="mast__flags" aria-hidden="true">
+        {letters.map((l, i) => (
+          <SignalFlag key={i} letter={l} />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function Portrait({ name, photo }: { name: string; photo?: string }) {
   return photo ? (
@@ -59,10 +80,11 @@ export function Cabin() {
         <div className="crew" id="crew">
           <h3>Club Management</h3>
           <ul className="crew__list">
-            {crew.map(({ name, role, photo }) => (
+            {crew.map(({ name, firstName, role, photo }) => (
               <li className="crew__member" key={name}>
                 <p className="crew__name">{name}</p>
                 <p className="crew__role">{role}</p>
+                <SignalMast name={firstName} />
                 <Portrait name={name} photo={photo} />
               </li>
             ))}
