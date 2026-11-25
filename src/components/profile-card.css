@@ -183,3 +183,12 @@
     opacity: 1;
   }
 }
+
+/* phones: a slightly tighter page, so a six-sentence entry still fits */
+@media (max-width: 560px) {
+  .card__back {
+    padding-top: 0.75rem;
+    padding-bottom: 0.6rem;
+    font-size: 0.8rem;
+  }
+}

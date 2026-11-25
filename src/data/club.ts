@@ -77,7 +77,7 @@ export const crewMembers: CrewMember[] = [
     name: 'Baturay',
     fullName: 'Baturay Ofluoğlu',
     photo: '/crew/baturay.jpg',
-    bio: 'Baturay started sailing in 2007 at Gökova Yelken Kulübü, in a Laser. He then joined İstanbul Yelken Kulübü, where he sailed Pirats and Lasers. From 2012 to 2016 he raced a First 40 and a J/80 in Istanbul. He has also sailed the Atlantic, on a passage from Gibraltar to Las Palmas in the Canary Islands. Since 2024 he has been an active member of TISE.',
+    bio: 'Baturay started sailing in 2007 at Gökova Yelken Kulübü, in a Laser. He then joined İstanbul Yelken Kulübü, where he sailed Pirats and Lasers. From 2012 to 2016 he raced a First 40 and a J/80 in Istanbul. He has also sailed the Atlantic, on a passage from Gibraltar to Las Palmas in the Canary Islands. Since 2024 he has been an active member of TISE. Ashore, he is an entrepreneur and AI consultant, and lives in Belgium.',
   },
   { name: 'Beyza', fullName: 'Beyza Alabay', photo: '/crew/beyza.jpg' },
   { name: 'Joel', fullName: 'Joel Newburn', photo: '/crew/joel.jpg' },
