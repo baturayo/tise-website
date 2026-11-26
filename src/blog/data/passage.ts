@@ -175,7 +175,7 @@ export const days: Day[] = [
     title: 'The diesel was on board all along',
     story: [
       'We came in to Mohammedia in the dark, at the end of Niko’s and my 04:00 watch, and called the port on the VHF. Nobody really answered. The most we got out of the harbour office was that we should wait outside. Fine: we would anchor. Except the anchor had been taken off the boat, chain and rope, before we came aboard, so first we had to rig it. Then we spent what was left of the night at anchor, waiting for the fuel station to open. It was closed. We waited. It stayed closed.',
-      'While we waited we found that the reserve gas bottle was suspiciously light (Tymon disagreed) and then, in a twist nobody saw coming, jerry cans on board holding enough diesel for the passage. We had stopped, basically, for nothing. We left at 10:30 with the main tank full and 60 litres spare, in three 20-litre jerry cans, and ship’s time went over to UTC. At 13:00, in a flat calm, we tried the storm sails: the storm jib could not be hoisted at all, being lashed with elastic around the furled genoa. Better to learn that in zero knots than in thirty.',
+      'While we waited we found that the reserve gas bottle was suspiciously light (Tymon disagreed) and then, in a twist nobody saw coming, three 20-litre jerry cans of diesel on board: 60 litres. We had stopped, basically, for nothing. Still, better to check than to be sorry in the middle of the ocean with no fuel. We topped up the main tank from the jerry cans, and at 10:30 we left with it full and ten litres still spare in a can, carrying on to Agadir to refuel properly. Ship’s time went over to UTC. At 13:00, in a flat calm, we tried the storm sails: the storm jib could not be hoisted at all, being lashed with elastic around the furled genoa. Better to learn that in zero knots than in thirty.',
       'Rob set up a galley rota, since Niko was spending most of his life at the stove: the afternoon watch cooks dinner, and the next day’s lunch. Democracy had come to the galley.',
       'That night brought, for me, the best part of the whole trip. There was no wind that day (the log says Force 0 to 1, and the engine did most of the work), and the sea was so flat that the bioluminescence lit up everything that moved. On our 22:00 watch the dolphins came, torpedoes made of light, and raced the boat. I spent more than half an hour on the foredeck watching them. We were doing about four and a half knots, which to a dolphin is a warm-up; they never tired. Twice I saw a big shoal of fish leap clear of the water, trying to get away from them. They didn’t. The dolphins had their dinner and carried on racing us while they ate it. No wind, no sailing, and still amazing.',
     ],
@@ -183,8 +183,8 @@ export const days: Day[] = [
       { text: 'Called the port on the VHF, on our watch: nobody really answered', kind: 'harbour', n: 19 },
       { time: '06:00', text: 'Told to wait outside; anchor rigged, then dropped', kind: 'harbour' },
       { text: 'The fuel station: closed. We waited; it stayed closed', kind: 'harbour' },
-      { text: 'Jerry cans of diesel found on board', kind: 'gear' },
-      { time: '10:30', text: 'Left Mohammedia: tank full + 60 litres spare (3 × 20 l)', kind: 'harbour', n: 21 },
+      { text: 'Three 20-litre jerry cans of diesel found on board', kind: 'gear' },
+      { time: '10:30', text: 'Main tank topped up from the jerry cans; left Mohammedia full + 10 litres spare, for Agadir', kind: 'harbour', n: 21 },
       { text: 'Ship’s time changed to UTC', kind: 'sailing', n: 20 },
       { time: '13:00', text: 'Zero wind: trysail and storm jib tested; the storm jib can’t be hoisted', kind: 'gear', n: 22 },
       { text: 'Tortillas with mushroom, pepper, cucumber and tofu', kind: 'galley' },
@@ -307,12 +307,13 @@ export const days: Day[] = [
 export const bosunsList: { day: number; what: string; fix: string }[] = [
   { day: 1, what: 'An electronic fault, then two leaks in the engine cooling', fix: 'Pumped out, traced, and the water level checked every hour after that' },
   { day: 3, what: 'No anchor: chain and rope had been taken off the boat', fix: 'Rigged it outside Mohammedia before we could anchor' },
-  { day: 3, what: 'We needed diesel', fix: 'A detour to Mohammedia, where the fuel station stayed closed. Then we found jerry cans of it on board: tank full + 60 litres spare, in three 20-litre cans' },
+  { day: 3, what: 'We needed diesel', fix: 'A detour to Mohammedia, where the fuel station stayed closed. Then we found three 20-litre jerry cans on board, topped up the main tank from them and carried on to Agadir to refuel' },
   { day: 3, what: 'The reserve gas bottle felt empty', fix: 'Disputed (by Tymon)' },
   { day: 3, what: 'The storm jib can’t be hoisted: it is lashed around the furled genoa', fix: 'Found in a flat calm, not in a gale' },
   { day: 4, what: 'The genoa halyard broke (“Jib swivel broken?”, 22:14)', fix: 'Jib furled by hand; Rob went up the mast, but it couldn’t be fixed at sea. Reefed main and engine to Agadir' },
   { day: 6, what: 'The genoa torn at the head', fix: 'Damaged end cut off, washing-up liquid on the luff, Tymon up the mast' },
   { day: 7, what: 'The roof leaked, and my foul-weather gear wasn’t up to the job', fix: 'Nothing to be done at sea: I stayed wet. The lessons are further up' },
+  { day: 9, what: 'Found in Las Palmas: three of the six screws missing from the gooseneck, which holds the boom to the mast', fix: 'A big maintenance before she sailed on. Luckily, it held through both blows' },
 ];
 
 export type CareMark = 'shower' | 'cotton' | 'pro' | 'spin' | 'shake';
@@ -337,7 +338,7 @@ export const careLabel: { mark: CareMark; title: string; text: string }[] = [
   {
     mark: 'spin',
     title: 'Expect the spin cycle',
-    text: 'I had never been seasick in my life before this trip, so I didn’t even bother to bring seasickness pills. When it hit, I was too dizzy even to ask the crew for one, and went straight to bed. Plan as if you will be: bring them, and keep them somewhere you can reach easily, not at the bottom of your bag.',
+    text: 'I had never been seasick in my life before this trip, so I didn’t even bother to bring seasickness pills, although ChatGPT warned me several times. When it hit, I was too dizzy even to ask the crew for one, and went straight to bed. Plan as if you will be: bring them, and keep them somewhere you can reach easily, not at the bottom of your bag.',
   },
   {
     mark: 'shake',

@@ -444,6 +444,12 @@ export function Post() {
             crew it was only a stop: the boat sailed on, and they stayed aboard to show the next crew the ropes.
           </p>
           <p>
+            First, though, Escapado went in for a big maintenance, and she needed it. The gooseneck, the fitting that holds the
+            boom to the mast, should have had six screws; three of them were missing. Luckily, nothing happened in either blow. As
+            I write this, she is racing in the ARC, crossing the Atlantic from Las Palmas to the Caribbean. We wish them all the
+            best. Fair winds, Escapado!
+          </p>
+          <p>
             TISE sails the Belgian and Dutch coast through the season, and further afield in summer. If this made you want to go,
             come sailing with us.
           </p>
