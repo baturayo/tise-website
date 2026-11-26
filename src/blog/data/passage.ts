@@ -315,7 +315,7 @@ export const bosunsList: { day: number; what: string; fix: string }[] = [
   { day: 7, what: 'The roof leaked, and my foul-weather gear wasn’t up to the job', fix: 'Nothing to be done at sea: I stayed wet. The lessons are further up' },
 ];
 
-export type CareMark = 'shower' | 'cotton' | 'pro' | 'spin';
+export type CareMark = 'shower' | 'cotton' | 'pro' | 'spin' | 'shake';
 
 /** What Wednesday taught me, written as the care label I wish my kit had come with. */
 export const careLabel: { mark: CareMark; title: string; text: string }[] = [
@@ -337,6 +337,11 @@ export const careLabel: { mark: CareMark; title: string; text: string }[] = [
   {
     mark: 'spin',
     title: 'Expect the spin cycle',
-    text: 'I had never been seasick in my life before this trip. Plan as if you will be.',
+    text: 'I had never been seasick in my life before this trip, so I didn’t even bother to bring seasickness pills. When it hit, I was too dizzy even to ask the crew for one, and went straight to bed. Plan as if you will be: bring them, and keep them somewhere you can reach easily, not at the bottom of your bag.',
+  },
+  {
+    mark: 'shake',
+    title: 'Pack protein you can drink',
+    text: 'In a storm it’s very difficult to cook, and on board it’s often hard to get enough protein anyway. Protein shakes are really handy: next time they’re coming with me.',
   },
 ];

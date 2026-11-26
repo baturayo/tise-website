@@ -28,6 +28,14 @@ function Mark({ mark }: { mark: CareMark }) {
           </text>
         </>
       )}
+      {mark === 'shake' && (
+        <>
+          {/* a shaker bottle: lid, body, and the line to fill it to */}
+          <path d="M15 5h10v5H15z" />
+          <path d="M13 10h14l-1.6 25h-10.8z" />
+          <path d="M14 19h12" />
+        </>
+      )}
       {mark === 'spin' && (
         <>
           <path d={tub} />
