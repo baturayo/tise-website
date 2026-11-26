@@ -15,7 +15,7 @@ export const photos: Photo[] = [
     w: 600,
     h: 800,
     alt: 'Escapado, our First 40.7, alongside the pontoon at Alcaidesa Marina, Sail Racing on her hull, with the Rock of Gibraltar behind.',
-    caption: 'Alcaidesa, half past nine. We were meant to be gone by now; we were looking for leaks instead.',
+    caption: 'Alcaidesa Marina on the morning of departure, while we looked for the engine leaks.',
   },
   {
     file: 'rock-astern',
@@ -23,7 +23,7 @@ export const photos: Photo[] = [
     w: 600,
     h: 800,
     alt: 'A crew member at the wheel in a red jacket and lifejacket, smiling, with the Rock of Gibraltar on the horizon astern.',
-    caption: 'Away at last, seven hours late, with the Rock astern.',
+    caption: 'Leaving Gibraltar, with the Rock astern.',
   },
   {
     file: 'crew-in-the-strait',
@@ -31,7 +31,7 @@ export const photos: Photo[] = [
     w: 600,
     h: 800,
     alt: 'A selfie of five of the crew in the cockpit in red jackets, with the Strait behind them.',
-    caption: 'Five of the seven in the Strait, twelve minutes before the whale.',
+    caption: 'Five of the seven in the Strait, shortly before the whale.',
   },
   {
     file: 'whale',
@@ -39,7 +39,7 @@ export const photos: Photo[] = [
     w: 600,
     h: 800,
     alt: 'The blow of a whale rising from a grey sea, its back just breaking the surface, with the hills of the coast behind.',
-    caption: 'The whale, in the shipping lanes. My phone says 17:59; the log, written once the excitement had died down, says 18:06.',
+    caption: 'The whale in the shipping lanes of the Strait, logged at 18:06.',
   },
   {
     file: 'stars',
@@ -47,7 +47,7 @@ export const photos: Photo[] = [
     w: 600,
     h: 800,
     alt: 'A night sky full of stars over the dark sea, with the rigging and a red light at the edge of the frame.',
-    caption: 'Friday night off Morocco: no wind, and more stars than sky.',
+    caption: 'Friday night off the Moroccan coast.',
   },
   {
     file: 'mohammedia-calm',
@@ -55,7 +55,7 @@ export const photos: Photo[] = [
     w: 600,
     h: 800,
     alt: 'A winch and coiled lines in the foreground, and a flat, glassy sea in the morning haze.',
-    caption: 'Off Mohammedia, waiting for a fuel station that never opened. Not a ripple.',
+    caption: 'At anchor off Mohammedia, waiting for the fuel station to open.',
   },
   {
     file: 'no-wind',
@@ -63,7 +63,7 @@ export const photos: Photo[] = [
     w: 600,
     h: 800,
     alt: 'Mainsail and jib up in golden afternoon light, the sun low over a calm sea.',
-    caption: 'Saturday afternoon: sails up, Force 0 to 1, and the engine doing the real work.',
+    caption: 'Saturday afternoon: Force 0 to 1, motor-sailing.',
   },
   {
     file: 'dolphins-in-the-light',
@@ -71,7 +71,7 @@ export const photos: Photo[] = [
     w: 600,
     h: 800,
     alt: 'At night, the bow pulpit lit red by the navigation light, with two faint blue streaks of bioluminescence in the black water below.',
-    caption: 'Our 22:00 watch: dolphins at the bow, lit by the bioluminescence. My phone saw two smudges of blue. I saw torpedoes.',
+    caption: 'Dolphins at the bow on our 22:00 watch, lit by the bioluminescence.',
   },
   {
     file: 'sunday-foredeck',
@@ -79,7 +79,7 @@ export const photos: Photo[] = [
     w: 600,
     h: 800,
     alt: 'A crew member in a red jacket and lifejacket sitting on the side deck, smiling, under a grey sky.',
-    caption: 'Sunday morning: wind at last, close-hauled at Force 2 to 3. Lovely.',
+    caption: 'Sunday morning, sailing close-hauled at Force 2 to 3.',
   },
   {
     file: 'sunday-cockpit',
@@ -87,7 +87,7 @@ export const photos: Photo[] = [
     w: 600,
     h: 800,
     alt: 'Three of the crew in the cockpit, laughing, the boat heeled under a cloudy sky.',
-    caption: 'Still lovely. Be careful what you wish for.',
+    caption: 'Sunday morning in the cockpit, before the wind built.',
   },
   {
     file: 'building',
@@ -95,7 +95,7 @@ export const photos: Photo[] = [
     w: 800,
     h: 600,
     alt: 'A crew member at the wheel, braced, with whitecaps on a grey-blue sea behind.',
-    caption: 'Sunday, four o’clock: third reef in, jib away, and it kept building.',
+    caption: 'Sunday afternoon: third reef in and the jib furled.',
   },
   {
     file: 'wake-at-sunset',
@@ -103,7 +103,7 @@ export const photos: Photo[] = [
     w: 600,
     h: 800,
     alt: 'Sunset in orange and pink over the sea, the wake curling white past a winch.',
-    caption: 'Monday ended like this, broken halyard and all.',
+    caption: 'Sunset on Monday.',
   },
   {
     file: 'helm-at-sunset',
@@ -111,7 +111,7 @@ export const photos: Photo[] = [
     w: 600,
     h: 800,
     alt: 'A crew member at the wheel in a red jacket, smiling, with a yellow sunset over the sea behind.',
-    caption: 'The same sunset, from the wheel.',
+    caption: 'Monday’s sunset, at the wheel.',
   },
   {
     file: 'going-west',
@@ -119,7 +119,7 @@ export const photos: Photo[] = [
     w: 600,
     h: 800,
     alt: 'At night, a crew member at the wheel lit red by the cockpit light, stars overhead and the glow of the coast on the horizon.',
-    caption: 'Tuesday night, going west at last, with the lights of the Moroccan coast still on the horizon.',
+    caption: 'Tuesday night after leaving Agadir, with the lights of the Moroccan coast on the horizon.',
   },
   {
     file: 'trysail-helm',
@@ -135,7 +135,7 @@ export const photos: Photo[] = [
     w: 600,
     h: 800,
     alt: 'Two of the crew at the wheel in shorts and T-shirts, under a clear blue sky on a deep blue sea.',
-    caption: 'Thursday: the Atlantic apologised, and the shorts came out.',
+    caption: 'Thursday, the morning after the gale.',
   },
   {
     file: 'laundry',
@@ -143,7 +143,7 @@ export const photos: Photo[] = [
     w: 800,
     h: 600,
     alt: 'A crew member at the wheel in a white T-shirt and yellow shorts, thumbs up, with orange gear hung over the rail behind.',
-    caption: 'The floating laundry, open for business behind the helm.',
+    caption: 'Thursday: wet gear drying behind the helm.',
   },
   {
     file: 'kite',
@@ -151,7 +151,7 @@ export const photos: Photo[] = [
     w: 600,
     h: 800,
     alt: 'An orange spinnaker full of wind over a deep blue sea, with crew sitting along the side deck.',
-    caption: '15:54: the kite went up. The log doesn’t mention it; my phone does.',
+    caption: 'Thursday afternoon under spinnaker.',
   },
   {
     file: 'last-sunrise',
@@ -167,6 +167,6 @@ export const photos: Photo[] = [
     w: 600,
     h: 800,
     alt: 'Seen from above, the crew in the cockpit and on deck alongside the pontoon in Las Palmas, waving, in shorts and T-shirts.',
-    caption: 'Las Palmas: tied up, and dry at last.',
+    caption: 'Tied up in Las Palmas.',
   },
 ];
