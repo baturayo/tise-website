@@ -29,6 +29,9 @@ export function Footer() {
                 </li>
               ))}
             <li>
+              <a href={publicUrl('/sailing-blogs/')}>Sailing blog</a>
+            </li>
+            <li>
               <a href="#join">Join the club</a>
             </li>
           </ul>

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { publicUrl } from '../lib/paths';
 import { Logo } from './Logo';
 
 /** Everything on the page, top to bottom; used to work out which part is being read. */
@@ -57,6 +58,9 @@ export function Nav({ active }: { active: SectionId }) {
                 </a>
               </li>
             ))}
+            <li>
+              <a href={publicUrl('/sailing-blogs/')}>Blog</a>
+            </li>
           </ul>
           <a className="btn btn--primary nav__menu-cta" href="#join" onClick={() => setOpen(false)}>
             Sail with us

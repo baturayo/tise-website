@@ -52,7 +52,8 @@ const AEGEAN_BOAT = project(aegean, 28.3, 36.72);
 
 function useNarrow() {
   const query = '(max-width: 760px)';
-  const [narrow, setNarrow] = useState(() => window.matchMedia(query).matches);
+  // wide when rendered at build time, where there is no window; the browser corrects it
+  const [narrow, setNarrow] = useState(() => typeof window !== 'undefined' && window.matchMedia(query).matches);
   useEffect(() => {
     const mq = window.matchMedia(query);
     const on = () => setNarrow(mq.matches);

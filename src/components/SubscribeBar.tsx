@@ -20,7 +20,11 @@ function Icon({ d }: { d: string }) {
 
 /** Subscribe to /calendar.ics from any calendar app; updates to the plan reach subscribers automatically. */
 export function SubscribeBar() {
-  const links = useMemo(() => subscribeLinks(new URL(publicUrl('/calendar.ics'), window.location.href).href, club.name), []);
+  // the feed's full address: against the page in the browser, against the club's site when rendered at build time
+  const links = useMemo(() => {
+    const page = typeof window === 'undefined' ? `${club.siteUrl}/` : window.location.href;
+    return subscribeLinks(new URL(publicUrl('/calendar.ics'), page).href, club.name);
+  }, []);
   const [copied, setCopied] = useState(false);
   const copy = async () => {
     try {

@@ -6,6 +6,8 @@ import { PHOTO_SIZES, photos } from './photos';
 
 const folder = new URL('../../../public/sailing-blogs/gibraltar-to-las-palmas/photos/', import.meta.url);
 const published = photos.flatMap((p) => PHOTO_SIZES.map((size) => new URL(`${p.file}-${size}.jpg`, folder)));
+/** and the image link previews use, next to the post */
+const preview = new URL('../og.jpg', folder);
 
 /** A JPEG's bytes as text, one character per byte, to search it. */
 const asText = (jpeg: Uint8Array) => new TextDecoder('latin1').decode(jpeg);
@@ -37,7 +39,7 @@ describe('the passage photos', () => {
 
   it('carry no location, camera or time stamps: the site’s code is public', () => {
     const GPS = 0x8825, MAKE = 0x010f, MODEL = 0x0110, DATETIME = 0x0132, TAKEN = 0x9003, DIGITISED = 0x9004;
-    for (const url of published) {
+    for (const url of [...published, preview]) {
       const jpeg = readFileSync(url);
       for (const tag of [GPS, MAKE, MODEL, DATETIME, TAKEN, DIGITISED]) expect(exifTags(jpeg), url.pathname).not.toContain(tag);
       expect(asText(jpeg), url.pathname).not.toContain('iPhone');

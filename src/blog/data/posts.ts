@@ -9,6 +9,8 @@ export interface BlogPost {
   date: string;
   /** the date as shown */
   when: string;
+  /** when it went online (ISO date): for search engines */
+  published: string;
   author: string;
   summary: string;
 }
@@ -19,6 +21,7 @@ export const posts: BlogPost[] = [
     title: 'Gibraltar to Las Palmas',
     date: '2026-11-05',
     when: 'November 2026',
+    published: '2026-11-26',
     author: 'Baturay Ofluoğlu',
     summary:
       'Nine days and about 830 miles down the coast of Morocco to the Canaries: a whale in the Strait, a broken halyard, a fuel stop in Mohammedia with no fuel, and a gale under the trysail. Told from the boat’s logbook, with the wet bits left in.',

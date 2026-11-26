@@ -1,8 +1,10 @@
 import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
+import { posts } from './src/blog/data/posts';
 import { events2027 } from './src/data/calendar';
 import { club } from './src/data/club';
 import { buildICS } from './src/lib/ics';
+import { buildSitemap, sitePages } from './src/lib/sitemap';
 
 /** Generates the subscribable calendar feed (/calendar.ics) from src/data/calendar.ts. */
 function calendarFeed(): Plugin {
@@ -26,13 +28,30 @@ function calendarFeed(): Plugin {
   };
 }
 
+/** Generates /sitemap.xml for search engines: the club site, the blog and every post in src/blog/data/posts.ts. */
+function sitemap(): Plugin {
+  const render = () => buildSitemap(sitePages(club.siteUrl, posts));
+  return {
+    name: 'tise-sitemap',
+    configureServer(server) {
+      server.middlewares.use('/sitemap.xml', (_req, res) => {
+        res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+        res.end(render());
+      });
+    },
+    generateBundle() {
+      this.emitFile({ type: 'asset', fileName: 'sitemap.xml', source: render() });
+    },
+  };
+}
+
 /** The pages of the site: the club's one-page site, and the sailing blog (an index and its posts). */
 const page = (path: string) => decodeURIComponent(new URL(path, import.meta.url).pathname);
 
 export default defineConfig({
   // relative links, so the same build works on GitHub Pages (/tise-website/) and on the club's own domain
   base: './',
-  plugins: [react(), calendarFeed()],
+  plugins: [react(), calendarFeed(), sitemap()],
   build: {
     rolldownOptions: {
       input: {

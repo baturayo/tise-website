@@ -9,10 +9,12 @@
       content="TISE Sailing Club (Turkish International Sailors Europe) is a Brussels sailing club for every experience level: weekends on the Belgian and Dutch coast, a summer flotilla in Türkiye, and the full 2027 activity plan you can subscribe to."
     />
     <meta name="theme-color" content="#091226" />
+    <link rel="canonical" href="https://tisesailing.com/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="alternate" type="text/calendar" title="TISE Sailing Club calendar" href="./calendar.ics" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="TISE Sailing Club" />
     <meta property="og:title" content="TISE Sailing Club" />
     <meta
       property="og:description"
@@ -31,19 +33,22 @@
         "@type": "SportsClub",
         "name": "TISE Sailing Club",
         "alternateName": "Turkish International Sailors Europe",
+        "url": "https://tisesailing.com/",
+        "logo": "https://tisesailing.com/brand/tise-logo.png",
+        "image": "https://tisesailing.com/og-image.png",
         "sport": "Sailing",
         "foundingDate": "2013",
         "address": { "@type": "PostalAddress", "addressLocality": "Brussels", "addressCountry": "BE" },
         "sameAs": ["https://www.instagram.com/tise_sailing/"]
       }
     </script>
+    <!-- The page is rendered into #root at build time, for search engines and link previews. Hide it
+         until the app has rendered, so it doesn't flash; show it anyway after 3 s if the app fails. -->
+    <script>document.documentElement.classList.add('js-pending')</script>
+    <style>.js-pending #root{visibility:hidden;animation:tise-show 0s 3s forwards}@keyframes tise-show{to{visibility:visible}}</style>
   </head>
   <body>
     <div id="root"></div>
-    <noscript>
-      <h1>TISE Sailing Club</h1>
-      <p>TISE, Turkish International Sailors Europe: a Brussels sailing club since 2013. Find us on Instagram at instagram.com/tise_sailing or subscribe to our calendar at /calendar.ics.</p>
-    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

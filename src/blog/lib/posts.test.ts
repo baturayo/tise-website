@@ -7,6 +7,7 @@ const post = (slug: string, date: string): BlogPost => ({
   title: slug,
   date,
   when: date,
+  published: date,
   author: 'A sailor',
   summary: '',
 });
