@@ -10,6 +10,7 @@ import {
   shipTime,
   trackLength,
   utcMs,
+  writtenOnWatch,
 } from './passage';
 
 const entry = (over: Partial<LogEntry>): LogEntry => ({
@@ -121,6 +122,26 @@ describe('onWatch', () => {
   });
   it('is nobody listed outside the rota', () => {
     expect(onWatch(rota, 9)).toBeNull();
+  });
+});
+
+describe('writtenOnWatch', () => {
+  const rota = [
+    { name: 'me', hours: [[16, 18], [22, 24], [4, 6], [10, 12]] as [number, number][] },
+    { name: 'them', hours: [[18, 20], [0, 2], [6, 8], [12, 14]] as [number, number][] },
+  ];
+  const log = [
+    entry({ n: 1, date: '2026-11-05', time: '23:00', remark: 'Cape abeam' }),
+    entry({ n: 2, date: '2026-11-06', time: '01:00', remark: 'Their line' }),
+    entry({ n: 3, date: '2026-11-06', time: '05:00' }),
+    entry({ n: 4, date: '2026-11-08', time: '22:14', remark: 'Jib swivel broken?' }),
+    entry({ n: 5, date: '2026-11-09', time: '10:30', remark: 'After the day watches changed' }),
+  ];
+  it('lists the remarks written in a pair’s hours while the two-hour rota ran', () => {
+    expect(writtenOnWatch(log, rota, 'me').map((e) => e.n)).toEqual([1, 4]);
+  });
+  it('leaves out lines the pair didn’t write, whatever the rota says', () => {
+    expect(writtenOnWatch(log, rota, 'me', [4]).map((e) => e.n)).toEqual([1]);
   });
 });
 

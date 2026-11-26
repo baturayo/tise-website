@@ -1,18 +1,30 @@
-import { useMemo } from 'react';
+import { useMemo, type ReactNode } from 'react';
 import { BlogFooter, BlogHeader } from '../components/BlogChrome';
 import { ChartDefs, PassageChart, fullChart } from '../components/PassageChart';
 import { logbook } from '../data/logbook';
 import { ports } from '../data/passage';
+import { posts } from '../data/posts';
 import { buildTrack, timeline } from '../lib/passage';
+import { newestFirst } from '../lib/posts';
 import { useReducedMotion } from '../../hooks/motion';
 
 const ROOT = '../';
 
-/** The blog's front page: its posts, newest first. One for now. */
-export function BlogIndex() {
+/** The Atlantic passage's chart, small, as its post's picture. */
+function AtlanticThumb() {
   const still = useReducedMotion();
   const track = useMemo(() => buildTrack(logbook, ports), []);
   const times = useMemo(() => timeline(track), [track]);
+  return <PassageChart className="bi__chart" track={track} times={times} view={fullChart} drawIn={false} still={still} label="" />;
+}
+
+/** Each post's picture on the front page, by slug. */
+const THUMBS: Record<string, () => ReactNode> = {
+  'gibraltar-to-las-palmas': () => <AtlanticThumb />,
+};
+
+/** The blog's front page: its posts, newest first. */
+export function BlogIndex() {
   return (
     <>
       <ChartDefs />
@@ -23,19 +35,20 @@ export function BlogIndex() {
           <p className="bi__sub">Passages, races and weekends afloat, written up by TISE members.</p>
         </div>
         <ol className="bi__posts">
-          <li className="bi__post">
-            <a className="bi__link" href="gibraltar-to-las-palmas/">
-              <PassageChart className="bi__chart" track={track} times={times} view={fullChart} drawIn={false} still={still} label="" />
-              <span className="bi__text">
-                <span className="bi__date">November 2026 · Baturay Ofluoğlu</span>
-                <span className="bi__post-title">Gibraltar to Las Palmas</span>
-                <span className="bi__summary">
-                  Nine days and about 830 miles down the Atlantic coast of Morocco to the Canaries: a whale in the Strait, a broken
-                  halyard, paperwork in Agadir and a day under the trysail, told from the boat’s logbook.
+          {newestFirst(posts).map((p) => (
+            <li key={p.slug} className="bi__post">
+              <a className="bi__link" href={`${p.slug}/`}>
+                {THUMBS[p.slug]?.()}
+                <span className="bi__text">
+                  <span className="bi__date">
+                    {p.when} · {p.author}
+                  </span>
+                  <span className="bi__post-title">{p.title}</span>
+                  <span className="bi__summary">{p.summary}</span>
                 </span>
-              </span>
-            </a>
-          </li>
+              </a>
+            </li>
+          ))}
         </ol>
       </main>
       <BlogFooter root={ROOT} />

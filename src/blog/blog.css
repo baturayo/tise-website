@@ -150,6 +150,24 @@ a {
   color: #fff;
   border-bottom-color: var(--gold);
 }
+.bh__blog--back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.bh__chevron {
+  width: 8px;
+  height: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.2s;
+}
+.bh__blog--back:hover .bh__chevron {
+  transform: translateX(-3px);
+}
 @media (max-width: 420px) {
   .bh__club {
     display: none;
@@ -352,6 +370,10 @@ a {
   transform: translate(calc(var(--upp) * -9px), calc(var(--upp) * -6px));
   text-anchor: end;
 }
+.pc__note-text--right {
+  transform: translate(calc(var(--upp) * 9px), calc(var(--upp) * -6px));
+  text-anchor: start;
+}
 .pc__boat {
   pointer-events: none;
 }
@@ -464,6 +486,42 @@ a {
   font-size: 1.4rem;
   line-height: 1.5;
 }
+/* who and what was aboard, set like the crew list on a log's first page */
+.aboard {
+  margin: 1.6rem 0 0.4rem;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  font: 0.9375rem/1.45 var(--font-body);
+}
+.aboard > div {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  gap: 1rem;
+  padding: 0.55rem 0;
+}
+.aboard > div + div {
+  border-top: 1px solid var(--rule);
+}
+.aboard dt {
+  font-weight: 600;
+}
+.aboard__crew {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.aboard__note {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--ink-soft);
+  font-size: 0.875rem;
+}
+@media (max-width: 480px) {
+  .aboard > div {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
+}
 .intro__chart-note {
   font: 0.9375rem/1.55 var(--font-body);
   color: var(--ink-soft);
@@ -474,6 +532,7 @@ a {
   scroll-margin-top: 1rem;
 }
 .watches,
+.kit,
 .sheet,
 .sails,
 .bosun,
@@ -733,6 +792,130 @@ a {
 }
 .day__event:not(:has(.day__time)) span:last-child {
   grid-column: 2 / -1;
+}
+
+/* the day's photos: prints laid out on the chart table, each row one height */
+.photos {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.6rem;
+}
+.photos__row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+.photos__item {
+  flex: var(--ratio) 1 0;
+  min-width: 0;
+  margin: 0;
+}
+/* a single print would fill the column; keep it the size of the others */
+.photos__row--1 .photos__item {
+  flex: 0 1 auto;
+  width: min(100%, 26rem * var(--ratio));
+}
+.photos__open {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+.photos__open img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--rule);
+  box-shadow: 0 0 0 1px var(--rule);
+}
+.photos__open:hover img {
+  box-shadow: 0 0 0 1px var(--ink);
+}
+.photos__caption {
+  margin-top: 0.45rem;
+  font: 0.8125rem/1.4 var(--font-body);
+  color: var(--ink-soft);
+}
+/* on a phone, the day's prints in a row you swipe through */
+@media (max-width: 560px) {
+  .photos {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 0.5rem;
+  }
+  .photos__row {
+    display: contents;
+  }
+  .photos__item,
+  .photos__row--1 .photos__item {
+    flex: 0 0 auto;
+    width: min(85%, 19rem * var(--ratio));
+    scroll-snap-align: start;
+  }
+  .photos:has(.photos__item:only-child) {
+    overflow: visible;
+  }
+}
+
+/* one photo, full size, over the night blue */
+.lightbox {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-out;
+}
+.lightbox::backdrop {
+  background: rgb(9 18 38 / 0.94);
+}
+html:has(.lightbox[open]) {
+  overflow: hidden;
+}
+.lightbox__figure {
+  height: 100%;
+  margin: 0;
+  padding: 3.75rem 1rem 1.25rem;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  justify-items: center;
+  align-items: center;
+  gap: 0.9rem;
+}
+.lightbox__figure img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+.lightbox__caption {
+  max-width: 40rem;
+  color: #f3f7ff;
+  font: 0.9375rem/1.45 var(--font-body);
+  text-align: center;
+}
+.lightbox__close {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid rgb(243 247 255 / 0.5);
+  border-radius: 4px;
+  background: transparent;
+  color: #f3f7ff;
+  font: 500 0.875rem var(--font-body);
+  cursor: pointer;
+}
+.lightbox__close:hover {
+  border-color: #f3f7ff;
 }
 
 /* a strip of the log, ruled like its page */
@@ -1124,7 +1307,7 @@ a {
 
 /* ---------- landfall ---------- */
 .landfall {
-  padding: clamp(3rem, 8vw, 5rem) 0 clamp(4rem, 10vw, 7rem);
+  padding: clamp(3rem, 8vw, 5rem) 0;
   border-top: 1px solid var(--rule);
 }
 .landfall__cta {
@@ -1203,4 +1386,250 @@ a {
   .bi__link {
     grid-template-columns: 1fr;
   }
+}
+
+/* ---------- pack for the washing machine: a menu card and a care label ---------- */
+.kit {
+  border-top: 1px solid var(--rule);
+}
+.kit__layout {
+  width: min(100% - 2 * var(--gutter), 52rem);
+  margin: 2.5rem auto 0;
+  display: grid;
+  grid-template-columns: minmax(0, 17rem) minmax(0, 27rem);
+  justify-content: center;
+  align-items: start;
+  gap: 2.5rem 3.5rem;
+}
+
+/* the menu: a smart restaurant's card, for a meal that wasn't */
+.menu {
+  padding: 2rem 1.6rem 1.6rem;
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 0 0 1px var(--rule), 0 0 0 6px #fff, 0 0 0 7px var(--rule);
+  margin: 7px;
+}
+.menu__title {
+  font-size: 1.6rem;
+  font-style: italic;
+  line-height: 1.1;
+}
+.menu__sub {
+  margin-top: 0.3rem;
+  font: 0.875rem var(--font-body);
+  color: var(--ink-soft);
+}
+.menu__items {
+  list-style: none;
+  padding: 1.2rem 0 0;
+  margin: 1.2rem 0 0;
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: 1.3rem;
+}
+.menu__items li {
+  display: grid;
+  justify-items: center;
+  gap: 0.15rem;
+}
+.menu__pic {
+  width: 7.5rem;
+  height: auto;
+  margin-bottom: 0.3rem;
+}
+.menu__ink,
+.menu__ghost,
+.menu__bite {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.menu__ink {
+  fill: var(--land);
+}
+.menu__ghost {
+  stroke: var(--ink-soft);
+  stroke-dasharray: 3 4;
+}
+.menu__dot {
+  fill: var(--red);
+}
+.menu__dish {
+  font-size: 1.25rem;
+}
+.menu__qty {
+  font: 500 0.875rem var(--font-body);
+  color: var(--magenta);
+}
+.menu__foot {
+  margin-top: 1.4rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+/* the care label: satin, stitched in, with the laundry symbols bent to fit */
+.care {
+  position: relative;
+  padding: 1.6rem 1.6rem 1.4rem;
+  background: #fbfaf5;
+  font-family: var(--font-body);
+  box-shadow: 0 0 0 1px var(--rule), 0 12px 28px rgb(19 40 79 / 0.08);
+}
+.care::before {
+  /* the stitching */
+  content: '';
+  position: absolute;
+  inset: 7px;
+  border: 1.5px dashed rgb(19 40 79 / 0.28);
+  pointer-events: none;
+}
+.care__head {
+  font-weight: 650;
+  font-size: 1rem;
+  text-align: center;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--rule);
+}
+.care__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.care__row {
+  display: grid;
+  grid-template-columns: 2.6rem 1fr;
+  gap: 1rem;
+  align-items: start;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.care__mark {
+  width: 2.6rem;
+  height: 2.6rem;
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.care__mark text {
+  fill: var(--ink);
+  stroke: none;
+  font: 650 16px var(--font-body);
+}
+.care__mark .care__temp {
+  font-size: 10px;
+}
+.care__title {
+  display: block;
+  font-weight: 650;
+  font-size: 1rem;
+  color: var(--ink);
+}
+.care__text {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.care__fabric {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 1rem;
+  padding-top: 1rem;
+  font-weight: 650;
+  font-size: 1.125rem;
+}
+.care__fabric s {
+  font-weight: 400;
+  color: var(--red);
+  text-decoration-thickness: 2px;
+}
+@media (max-width: 760px) {
+  .kit__layout {
+    grid-template-columns: minmax(0, 27rem);
+  }
+  .menu {
+    max-width: 20rem;
+    justify-self: center;
+    width: calc(100% - 14px);
+  }
+}
+
+/* ---------- more from the blog ---------- */
+.pn {
+  border-top: 1px solid var(--rule);
+  background: #fff;
+  padding: clamp(2.5rem, 6vw, 4rem) 0;
+}
+.pn__inner {
+  width: min(100% - 2 * var(--gutter), var(--measure));
+  margin-inline: auto;
+}
+.pn__title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.pn__pair {
+  list-style: none;
+  padding: 0;
+  margin: 1.2rem 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+}
+.pn__link {
+  display: grid;
+  gap: 0.25rem;
+  height: 100%;
+  padding: 1.1rem 1.25rem;
+  text-decoration: none;
+  box-shadow: 0 0 0 1px var(--rule);
+  transition: box-shadow 0.2s;
+}
+.pn__link:hover {
+  box-shadow: 0 0 0 1px var(--ink), 0 8px 24px rgb(19 40 79 / 0.08);
+}
+.pn__link--next {
+  text-align: right;
+}
+.pn__dir {
+  font: 500 0.875rem var(--font-body);
+  color: var(--magenta);
+}
+.pn__post {
+  font-size: 1.35rem;
+  line-height: 1.15;
+}
+.pn__meta {
+  font: 0.875rem var(--font-body);
+  color: var(--ink-soft);
+}
+.pn__empty {
+  margin-top: 0.5rem;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+.pn__all {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 1.4rem;
+  padding: 0.55rem 1.3rem;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1.5px var(--ink);
+  font: 600 1rem var(--font-body);
+  text-decoration: none;
+}
+.pn__all:hover {
+  background: var(--ink);
+  color: #fff;
 }

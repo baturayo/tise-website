@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { LogEntry } from '../data/logbook';
-import { rota } from '../data/passage';
-import { onWatch } from '../lib/passage';
+import { notWrittenByUs, rota } from '../data/passage';
+import { writtenOnWatch } from '../lib/passage';
 
 const R = 118; // radius of the watch ring
 const W = 26; // its width
@@ -32,17 +32,15 @@ const hourOf = (time: string) => {
  */
 export function WatchDial({ log }: { log: LogEntry[] }) {
   const [focus, setFocus] = useState<string | null>(null);
-  // the two-hour rota ran from the first evening until the day watches changed on 9 November
-  const rotaEntries = log.filter((e) => e.time && e.leg === 1 && e.date >= '2026-11-05' && e.date <= '2026-11-08');
-  const mine = rotaEntries.filter((e) => onWatch(rota, hourOf(e.time!)) === 'mine' && e.remark);
+  const mine = writtenOnWatch(log, rota, 'mine', notWrittenByUs);
 
   return (
     <figure className="watch">
       <svg className="watch__dial" viewBox="-170 -170 340 340" role="img" aria-labelledby="watch-title watch-desc">
         <title id="watch-title">The watch rota, 24 hours</title>
         <desc id="watch-desc">
-          Three pairs kept two-hour watches. Mine was 04:00 to 06:00, 10:00 to 12:00, 16:00 to 18:00 and 22:00 to midnight;
-          the journal’s writer and Sophia came straight after me.
+          Three pairs kept two-hour watches. Niko’s and mine was 04:00 to 06:00, 10:00 to 12:00, 16:00 to 18:00 and 22:00 to
+          midnight; Emmanuel and Sophia came on after us, then Tymon and Samir.
         </desc>
         <circle className="watch__face" r={R + 34} />
         {rota.map((w) =>
@@ -53,7 +51,7 @@ export function WatchDial({ log }: { log: LogEntry[] }) {
               d={arc(a + 0.04, b - 0.04, R - W, R)}
             >
               <title>
-                {String(a).padStart(2, '0')}:00–{String(b % 24).padStart(2, '0')}:00, {w.label.toLowerCase()}
+                {String(a).padStart(2, '0')}:00–{String(b % 24).padStart(2, '0')}:00, {w.label}
               </title>
             </path>
           )),
@@ -108,10 +106,10 @@ export function WatchDial({ log }: { log: LogEntry[] }) {
             </li>
           ))}
         </ul>
-        <p className="watch__note">From Monday 9 November the day watches ran three hours, and mine became 10:00–13:00.</p>
+        <p className="watch__note">From Monday 9 November the day watches ran three hours, and ours became 10:00–13:00.</p>
       </figcaption>
       <div className="watch__mine">
-        <h3>Written in the log on my watch</h3>
+        <h3>Written in the log on our watch</h3>
         <ol>
           {mine.map((e) => (
             <li key={e.n}>

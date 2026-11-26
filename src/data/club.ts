@@ -93,7 +93,17 @@ export const crewMembers: CrewMember[] = [
     bio: 'Joel started sailing in 2021, learning the sheets on an RYA Competent Crew course on the Baltic Sea, and has since progressed through Day Skipper to Coastal Skipper. He and his family usually charter in the Mediterranean, and are building up experience and shopping for a boat to live aboard in the coming years. He lives in the suburbs of Brussels.',
   },
   { name: 'John', fullName: 'John Hird' },
-  { name: 'Sezen', fullName: 'Sezen Gürlek', photo: '/crew/sezen.jpg' },
+  {
+    name: 'Sezen',
+    fullName: 'Sezen Gürlek',
+    photo: '/crew/sezen.jpg',
+    bio: "Sezen started sailing in 2022 as a beginner at Fenerbahçe Doğuş Sailing Club in Istanbul. She later joined Tüpraş's corporate sailing team, competing in regattas across Turkish waters for a year aboard a MAT 10.10 yacht in the IRC 2 class. Based in Brussels, she enjoys sailing and exploring destinations with beautiful nature and turquoise waters. She is keen to build on her experience, develop her sailing skills, and make sailing a regular part of her future adventures.",
+  },
   { name: 'Yeter', fullName: 'Yeter Gökburun Bilgiç', photo: '/crew/yeter.jpg' },
-  { name: 'Özge', fullName: 'Özge Bozal', photo: '/crew/ozge.jpg' },
+  {
+    name: 'Özge',
+    fullName: 'Özge Bozal',
+    photo: '/crew/ozge.jpg',
+    bio: 'Özge started sailing in 2012 at the Boğaziçi University Sailing Club in Istanbul. With the club, she competed on Platu 25 and J/80 boats in sailing cups and trophy races, both with her own team and as support crew for other teams. She has completed more than ten week-long sailing trips, several of them as skipper, along with leisure excursions. She also trained on Laser sailboats in Foça, İzmir, and has recently taken up windsurfing. Since 2026 she has been a member of TISE. Ashore, she is an AI/ML Engineer and lives in Belgium.',
+  },
 ];

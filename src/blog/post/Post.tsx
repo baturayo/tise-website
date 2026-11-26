@@ -2,27 +2,36 @@ import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { ScrollTrigger, useReducedMotion } from '../../hooks/motion';
 import { formatCoords } from '../../lib/geo';
 import { Barograph } from '../components/Barograph';
-import { BlogFooter, BlogHeader } from '../components/BlogChrome';
+import { BlogFooter, BlogHeader, PostNav } from '../components/BlogChrome';
+import { CareLabel } from '../components/CareLabel';
 import { ChartDefs, PassageChart, boxAround, fullChart, projectLatLon, type ChartControls, type ChartNote } from '../components/PassageChart';
+import { PhotoStrip } from '../components/PhotoStrip';
 import { SailWardrobe } from '../components/SailWardrobe';
 import { WatchDial } from '../components/WatchDial';
 import { logbook, type LogEntry } from '../data/logbook';
-import { bosunsList, callTheSkipper, days, ports, type Day, type Kind } from '../data/passage';
-import { buildTrack, dayNumber, nauticalMiles, positionAt, timeline, trackLength, utcMs } from '../lib/passage';
+import { bosunsList, callTheSkipper, days, ports, rota, type Day, type Kind } from '../data/passage';
+import { photos } from '../data/photos';
+import { buildTrack, dayNumber, nauticalMiles, positionAt, shipsDay, timeline, trackLength, utcMs } from '../lib/passage';
+import { photosOn } from '../lib/photos';
 
 const ROOT = '../../';
+const SLUG = 'gibraltar-to-las-palmas';
 
 const byN = new Map(logbook.map((e) => [e.n, e]));
 
+/** Who was aboard besides the skipper, in their watch pairs. */
+const crew = rota.map((w) => w.crewList ?? w.label);
+
 /** Navigator's notes pencilled on the chart, at the logged positions. */
-const NOTES: ChartNote[] = [
+const pencilled: { n: number; text: string; side?: ChartNote['side'] }[] = [
   { n: 2, text: 'Whale, 18:06' },
-  { n: 28, text: 'Dolphins in the phosphorescence' },
+  { n: 27, text: 'Dolphins in the phosphorescence', side: 'right' },
   { n: 39, text: 'Jib halyard gone, 22:14' },
   { n: 42, text: 'Eight dolphins, three young' },
   { n: 57, text: 'Trysail, 1009 hPa' },
   { n: 62, text: 'All reefs out, 7.6 kn' },
-].map(({ n, text }) => ({ lat: byN.get(n)!.lat!, lon: byN.get(n)!.lon!, text }));
+];
+const NOTES: ChartNote[] = pencilled.map(({ n, text, side }) => ({ lat: byN.get(n)!.lat!, lon: byN.get(n)!.lon!, text, side }));
 
 const KIND_LABEL: Record<Kind, string> = {
   wildlife: 'Wildlife',
@@ -31,14 +40,6 @@ const KIND_LABEL: Record<Kind, string> = {
   harbour: 'Harbour',
   sailing: 'Sailing',
 };
-
-/** The ship's day as a window of UTC time: ship's time was CET until 7 November, UTC after. */
-function dayWindow(date: string): [number, number] {
-  const d = Number(date.slice(8));
-  const start = Date.UTC(2026, 10, d, d <= 7 ? -1 : 0);
-  const end = Date.UTC(2026, 10, d + 1, d + 1 <= 7 ? -1 : 0);
-  return [start, end];
-}
 
 const long = (date: string) =>
   new Date(`${date}T12:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', timeZone: 'UTC' });
@@ -110,6 +111,7 @@ function DayArticle({ day, facts }: { day: Day; facts: DayFacts }) {
           {p}
         </p>
       ))}
+      <PhotoStrip photos={photosOn(photos, day.date)} />
       <ul className="day__events">
         {day.events.map((ev, i) => (
           <li key={i} className={`day__event day__event--${ev.kind}`}>
@@ -141,7 +143,7 @@ export function Post() {
   const plan = useMemo(
     () =>
       days.map((day) => {
-        const [a, b] = dayWindow(day.date);
+        const [a, b] = shipsDay(day.date);
         const t0 = Math.min(Math.max(a, departure), last);
         const t1 = Math.max(Math.min(b, last), t0);
         const inside = times.filter((p) => p.t >= t0 && p.t <= t1);
@@ -209,7 +211,7 @@ export function Post() {
   return (
     <>
       <ChartDefs />
-      <BlogHeader root={ROOT} />
+      <BlogHeader root={ROOT} here="post" />
       <main id="main" className="post">
         <section className="hero" aria-labelledby="post-title">
           <PassageChart
@@ -226,9 +228,17 @@ export function Post() {
             <h1 id="post-title" className="cartouche__title">
               Gibraltar to Las&nbsp;Palmas
             </h1>
-            <p className="cartouche__sub">Nine days down the Atlantic coast of Morocco to the Canaries, told from the boat’s logbook.</p>
+            <p className="cartouche__sub">Nine days down the Atlantic coast of Morocco to the Canaries, told from the boat’s logbook, with the wet bits left in.</p>
             <p className="cartouche__by">Baturay Ofluoğlu · 5–13 November 2026</p>
             <dl className="cartouche__notes">
+              <div>
+                <dt>Boat</dt>
+                <dd>Escapado</dd>
+              </div>
+              <div>
+                <dt>Type</dt>
+                <dd>First 40.7</dd>
+              </div>
               <div>
                 <dt>Run</dt>
                 <dd>about {miles} miles</dd>
@@ -251,13 +261,42 @@ export function Post() {
 
         <section className="intro wrap-text">
           <p className="intro__lede">
-            In November I was one of seven aboard a boat sailing from Gibraltar to Las Palmas de Gran Canaria: out through the
-            Strait, down the Atlantic coast of Morocco, and across to the Canaries.
+            In November I was one of seven aboard Escapado, a Beneteau First 40.7, on a Sail Racing Academy passage from
+            Gibraltar to Las Palmas de Gran Canaria: out through the Strait, down the Atlantic coast of Morocco, and across to the Canaries. We had
+            a whale, dolphins twice, two blows, a broken halyard, two stops for diesel (one of them for nothing) and my first
+            seasickness ever.
           </p>
+          <dl className="aboard">
+            <div>
+              <dt>Boat</dt>
+              <dd>Escapado, a Beneteau First 40.7: a 40-foot race boat</dd>
+            </div>
+            <div>
+              <dt>Organised by</dt>
+              <dd>Sail Racing Academy</dd>
+            </div>
+            <div>
+              <dt>Skipper</dt>
+              <dd>Rob</dd>
+            </div>
+            <div>
+              <dt>Crew</dt>
+              <dd>
+                <ul className="aboard__crew">
+                  {crew.map((pair) => (
+                    <li key={pair}>{pair}</li>
+                  ))}
+                </ul>
+                <span className="aboard__note">
+                  in watch pairs. Samir left us in Agadir; from there Rob stood his watches with Tymon.
+                </span>
+              </dd>
+            </div>
+          </dl>
           <p>
             This is that passage as the boat’s logbook tells it. Every position on this page is one we wrote down on watch, every
-            hour or two, with the barometer, the course, the speed and what sails were up. The stories come from a crewmate’s
-            journal, kept in French on board.
+            hour or two, with the barometer, the course, the speed and whatever sails were still working. The stories come from
+            Emmanuel’s journal, kept in French on board, and from my own memory, which is mostly of being wet.
           </p>
           <p className="intro__chart-note">
             On the chart, the blue water is shallower than 200 metres; each line beyond it is another kilometre down, to 4,000
@@ -272,7 +311,9 @@ export function Post() {
             </h2>
             <p>
               Seven aboard: Rob, the skipper, and three pairs of watchkeepers, two hours on deck and four below, around the clock.
-              The French journal’s writer kept 18:00 to 20:00 with Sophia; my watch came straight before his.
+              I kept mine with Niko. Emmanuel and Sophia took over from us, and Tymon and Samir from them. Rob, as skippers do,
+              was on call for all of it, and from Agadir on he was on the rota too: Samir left us there, and Rob took over his
+              watches with Tymon.
             </p>
           </div>
           <WatchDial log={logbook} />
@@ -320,6 +361,21 @@ export function Post() {
           </div>
         </section>
 
+        <section className="kit" aria-labelledby="kit-title">
+          <div className="wrap-text">
+            <h2 id="kit-title" className="section-title">
+              Pack for the washing machine
+            </h2>
+            <p>
+              If you take one thing from this post, take this. I had never been seasick before this trip, and I had never been
+              that wet for that long. Wednesday found every weak spot in my kit, and the time to find the weak spots in yours is
+              at home, not halfway to the Canaries.
+            </p>
+            <p>Here is what I ate, and the care label I wish my kit had come with.</p>
+          </div>
+          <CareLabel />
+        </section>
+
         <section className="sheet" aria-labelledby="sheet-title">
           <div className="wrap-text">
             <h2 id="sheet-title" className="section-title">
@@ -340,8 +396,8 @@ export function Post() {
               What was up
             </h2>
             <p>
-              A light-wind start and a broken jib halyard meant a lot of motoring. Once the wind came, we went through the whole
-              wardrobe: every reef in the main, and a day and a night under the trysail.
+              A light-wind start and a broken jib halyard meant a lot of motoring, which explains all the stops for diesel. Once
+              the wind came, we went through the whole wardrobe: every reef in the main, and a day and a night under the trysail.
             </p>
           </div>
           <SailWardrobe log={logbook} />
@@ -352,7 +408,7 @@ export function Post() {
             <h2 id="bosun-title" className="section-title">
               The bosun’s list
             </h2>
-            <p>Things that broke, or weren’t there, and what we did about them.</p>
+            <p>Things that broke, weren’t there or were closed, and what we did about them.</p>
             <ol className="bosun__list">
               {bosunsList.map((b, i) => (
                 <li key={i} className="bosun__item">
@@ -395,6 +451,7 @@ export function Post() {
             Sail with TISE
           </a>
         </section>
+        <PostNav slug={SLUG} />
       </main>
       <BlogFooter root={ROOT} />
     </>

@@ -141,7 +141,28 @@ export function onWatch(rota: Watch[], hour: number): string | null {
   return null;
 }
 
+/**
+ * The log lines with a remark written in one pair's hours while the two-hour rota ran (from the
+ * first evening until the day watches changed on 9 November), less any the pair didn't write.
+ */
+export function writtenOnWatch(log: LogEntry[], rota: Watch[], name: string, except: number[] = []): LogEntry[] {
+  return log.filter((e) => {
+    if (!e.time || !e.remark || e.leg !== 1 || e.date < '2026-11-05' || e.date > '2026-11-08') return false;
+    if (except.includes(e.n)) return false;
+    const [h, m] = e.time.split(':').map(Number);
+    return onWatch(rota, h + m / 60) === name;
+  });
+}
+
 /** Days are counted as in the journal: day 0 is the day before departure, 4 November. */
 export function dayNumber(date: string): number {
   return Math.round((Date.parse(`${date}T00:00:00Z`) - Date.UTC(2026, 10, 4)) / 86_400_000);
+}
+
+/** The ship's day as a window of UTC time, [start, end): ship's time was CET until 7 November, UTC after. */
+export function shipsDay(date: string): [number, number] {
+  const d = Number(date.slice(8));
+  const start = Date.UTC(2026, 10, d, d <= 7 ? -1 : 0);
+  const end = Date.UTC(2026, 10, d + 1, d + 1 <= 7 ? -1 : 0);
+  return [start, end];
 }

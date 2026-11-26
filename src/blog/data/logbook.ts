@@ -62,7 +62,7 @@ export const logbook: LogEntry[] = [
   { n: 18, leg: 1, date: '2026-11-07', time: '04:08', utcOffset: 1, lat: 33.9, lon: -7.2833, cog: 204, sog: 5.5, baro: 1023, main: 'full', engine: true, remark: 'Main + engine' },
   { n: 19, leg: 1, date: '2026-11-07', time: '05:00', utcOffset: 1, approx: true, engine: true, remark: 'Stop at Mohammedia for fuel' },
   { n: 20, leg: 1, date: '2026-11-07', time: null, utcOffset: 0, engine: false, remark: "Change ship's time to UTC" },
-  { n: 21, leg: 1, date: '2026-11-07', time: '10:30', utcOffset: 0, engine: true, remark: 'Leave Mohammedia. Main tank full + 10 litres spare in jerry can' },
+  { n: 21, leg: 1, date: '2026-11-07', time: '10:30', utcOffset: 0, engine: true, remark: 'Leave Mohammedia. Main tank full + 3 × 20 litres spare in jerry cans' },
   { n: 22, leg: 1, date: '2026-11-07', time: '13:00', utcOffset: 0, lat: 33.68, lon: -7.64, cog: 260, sog: 5.3, baro: 1021, wind: 'F0-1', engine: true, remark: 'Zero wind! Tested trysail + storm jib' },
   { n: 23, leg: 1, date: '2026-11-07', time: '15:59', utcOffset: 0, lat: 33.5833, lon: -7.9667, cog: 249, sog: 6.1, baro: 1019, engine: true, remark: 'Engine' },
   { n: 24, leg: 1, date: '2026-11-07', time: '18:25', utcOffset: 0, lat: 33.5, lon: -8.2333, cog: 251, sog: 6.0, baro: 1020, wind: 'F0-1', main: 'full', engine: true, remark: 'Engine + sail' },

@@ -25,6 +25,8 @@ export interface ChartNote {
   lat: number;
   lon: number;
   text: string;
+  /** which side of its mark the note is written; left unless it would run off the frame */
+  side?: 'left' | 'right';
 }
 
 const P = (lat: number, lon: number): Pt => project(M, lon, lat);
@@ -324,7 +326,7 @@ export function PassageChart({ track, times, view = fullChart, drawIn, boat, not
           return (
             <g key={n.text} className="pc__note">
               <path className="pc__note-mark" d={`M${p.x},${p.y}h0.001`} />
-              <text x={p.x} y={p.y} className="pc__note-text">
+              <text x={p.x} y={p.y} className={`pc__note-text${n.side === 'right' ? ' pc__note-text--right' : ''}`}>
                 {n.text}
               </text>
             </g>
