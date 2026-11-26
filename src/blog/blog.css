@@ -1,0 +1,1206 @@
+/*
+ * The sailing blog: a paper chart on the chart table. Chart white for the page, buff land, blue
+ * shallows, navy ink for the writing, pencil for the track, and chart magenta for the notes, as on
+ * an Admiralty chart. The club's night blue frames it, top and bottom.
+ */
+:root {
+  --paper: #f5f6f1;
+  --shoal: #cfe2ec;
+  --land: #ecdcab;
+  --land-edge: #7d6a39;
+  --ink: #13284f;
+  --ink-soft: #4a5b7c;
+  --pencil: #3d4148;
+  --magenta: #a3166e;
+  --red: #ce4427;
+  --navy: #004496;
+  --gold: #ffca05;
+  --night: #091226;
+  --rule: #d8dbd0;
+
+  --font-display: 'Newsreader Variable', 'Newsreader', Georgia, serif;
+  --font-body: 'Instrument Sans Variable', 'Instrument Sans', system-ui, sans-serif;
+  --measure: 36rem;
+  --gutter: clamp(1.25rem, 5vw, 3.5rem);
+  --bar: 64px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+body.blog {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 1.1875rem;
+  line-height: 1.65;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+h1,
+h2,
+h3,
+p,
+ol,
+ul,
+dl,
+dd,
+figure {
+  margin: 0;
+}
+a {
+  color: inherit;
+}
+:focus-visible {
+  outline: 2px solid var(--magenta);
+  outline-offset: 3px;
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.wrap-text {
+  width: min(100% - 2 * var(--gutter), var(--measure));
+  margin-inline: auto;
+}
+.section-title {
+  font-size: clamp(1.9rem, 1.4rem + 1.8vw, 2.6rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.9rem;
+}
+.post section > .wrap-text > p + p,
+.intro p + p,
+.landfall p + p {
+  margin-top: 1rem;
+}
+
+/* ---------- header and footer: the club's night blue ---------- */
+.bh {
+  position: relative;
+  z-index: 20;
+  background: var(--night);
+  color: #f3f7ff;
+  font-family: var(--font-body);
+}
+.bh__skip {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  padding: 0.5rem 0.8rem;
+  background: var(--gold);
+  color: var(--night);
+  font-weight: 600;
+  border-radius: 4px;
+}
+.bh__skip:focus {
+  top: 0.5rem;
+}
+.bh__bar {
+  height: var(--bar);
+  width: min(100% - 2 * var(--gutter), 80rem);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.bh__home {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  font-weight: 600;
+}
+.bh__logo {
+  display: block;
+  height: 48px;
+  width: auto;
+  padding: 3px 5px;
+  border-radius: 7px;
+  background: #fff;
+}
+.bh__blog {
+  font-weight: 500;
+  color: rgb(243 247 255 / 0.8);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  padding: 0.3rem 0;
+}
+.bh__blog:hover,
+.bh__blog[aria-current] {
+  color: #fff;
+  border-bottom-color: var(--gold);
+}
+@media (max-width: 420px) {
+  .bh__club {
+    display: none;
+  }
+}
+.bf {
+  background: var(--night);
+  color: rgb(243 247 255 / 0.72);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  padding: 2rem var(--gutter) 2.5rem;
+}
+.bf p {
+  width: min(100%, 80rem);
+  margin-inline: auto;
+}
+
+/* ---------- the chart ---------- */
+.pc {
+  position: relative;
+}
+.pc__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  --upp: 1;
+}
+.pc__shoal {
+  fill: var(--shoal);
+}
+.pc__deep {
+  fill: var(--paper);
+  fill-rule: evenodd;
+}
+.pc__contour {
+  fill: none;
+  stroke: #3a7bb5;
+  stroke-width: 0.8;
+  vector-effect: non-scaling-stroke;
+}
+.pc__contour--0 {
+  stroke-opacity: 0.85;
+  stroke-width: 1.1;
+}
+.pc__contour--1 {
+  stroke-opacity: 0.55;
+}
+.pc__contour--2,
+.pc__contour--3,
+.pc__contour--4 {
+  stroke-opacity: 0.35;
+  stroke-dasharray: 5 4;
+}
+.pc__grid {
+  fill: none;
+  stroke: var(--ink);
+  stroke-opacity: 0.12;
+  stroke-width: 0.7;
+  vector-effect: non-scaling-stroke;
+}
+.pc__land {
+  fill: var(--land);
+  fill-rule: evenodd;
+  stroke: var(--land-edge);
+  stroke-width: 0.9;
+  vector-effect: non-scaling-stroke;
+}
+.pc__name {
+  font-family: var(--font-body);
+  font-size: calc(var(--upp) * 12px);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  fill: #5d4f2c;
+  paint-order: stroke;
+  stroke: var(--land);
+  stroke-width: calc(var(--upp) * 3px);
+  stroke-linejoin: round;
+}
+.pc__name--island {
+  stroke: var(--paper);
+}
+.pc__name--water {
+  stroke: var(--paper);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: calc(var(--upp) * 15px);
+  letter-spacing: 0.06em;
+  fill: #2f6aa0;
+}
+.pc .rose__rhumbs line {
+  stroke: none;
+}
+.pc .rose__ring circle,
+.pc .rose__ring line {
+  fill: none;
+  stroke: var(--magenta);
+  stroke-opacity: 0.55;
+  stroke-width: 1;
+}
+.pc .rose__degrees text {
+  fill: var(--magenta);
+  fill-opacity: 0.7;
+  font: 500 7px var(--font-body);
+  text-anchor: middle;
+}
+.pc .rose__points path {
+  stroke: var(--magenta);
+  stroke-width: 0.6;
+  stroke-opacity: 0.6;
+}
+.pc .rose__light {
+  fill: var(--paper);
+}
+.pc .rose__dark {
+  fill: var(--magenta);
+  fill-opacity: 0.55;
+}
+.pc .rose__points circle {
+  fill: var(--magenta);
+}
+
+.pc__track {
+  fill: none;
+  stroke: var(--pencil);
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.pc__track--unlogged {
+  stroke-dasharray: 4 4;
+  stroke-opacity: 0.8;
+}
+/* scaled by hand, not with non-scaling-stroke: its dashes measure the distance run in chart units */
+.pc__sailed {
+  fill: none;
+  stroke: var(--magenta);
+  stroke-width: calc(var(--upp) * 2.6px);
+  stroke-linejoin: round;
+}
+.pc__fix-halo,
+.pc__fix-dot,
+.pc__port-mark,
+.pc__port-name--right {
+  transform: translate(calc(var(--upp) * 8px), calc(var(--upp) * 4px));
+  text-anchor: start;
+}
+.pc__note-mark {
+  fill: none;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+.pc__fix-hit {
+  fill: transparent;
+  stroke: none;
+  pointer-events: fill;
+  cursor: crosshair;
+}
+.pc__fix-halo {
+  stroke: var(--paper);
+  stroke-width: 6.5;
+}
+.pc__fix-dot {
+  stroke: var(--pencil);
+  stroke-width: 3.6;
+}
+.pc__fix:hover .pc__fix-dot {
+  stroke: var(--magenta);
+  stroke-width: 6;
+}
+.pc__port-mark {
+  stroke: var(--ink);
+  stroke-width: 8;
+}
+.pc__port-name {
+  font-family: var(--font-body);
+  font-size: calc(var(--upp) * 12.5px);
+  font-weight: 650;
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-width: calc(var(--upp) * 3px);
+  stroke-linejoin: round;
+  transform: translate(calc(var(--upp) * -8px), calc(var(--upp) * 4px));
+  text-anchor: end;
+}
+.pc__note-mark {
+  stroke: var(--magenta);
+  stroke-width: 5;
+}
+.pc__note-text {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: calc(var(--upp) * 13px);
+  fill: var(--magenta);
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-width: calc(var(--upp) * 3px);
+  stroke-linejoin: round;
+  transform: translate(calc(var(--upp) * -9px), calc(var(--upp) * -6px));
+  text-anchor: end;
+}
+.pc__boat {
+  pointer-events: none;
+}
+.pc__boat-hull {
+  transform: rotate(var(--hd, 200deg)) scale(calc(var(--upp) * 1.35));
+}
+.pc__boat-hull path:first-child {
+  fill: var(--red);
+  stroke: #fff;
+  stroke-width: 1.4;
+  paint-order: stroke;
+}
+.pc__boat-mast {
+  stroke: #fff;
+  stroke-width: 1.2;
+}
+.pc__readout {
+  position: absolute;
+  left: 0.75rem;
+  bottom: 0.75rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 3px;
+  background: rgb(245 246 241 / 0.92);
+  box-shadow: 0 0 0 1px rgb(19 40 79 / 0.15);
+  font: 500 0.8125rem/1.3 var(--font-body);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+/* ---------- hero: the whole passage, with the chart's title cartouche ---------- */
+.hero {
+  position: relative;
+  border-bottom: 1px solid var(--rule);
+}
+.hero__chart {
+  height: min(92svh, 62rem);
+  min-height: 34rem;
+}
+.cartouche {
+  position: absolute;
+  top: clamp(1rem, 4vw, 2.5rem);
+  left: clamp(1rem, 4vw, 3rem);
+  width: min(29rem, calc(100% - 2rem));
+  padding: 1.4rem 1.5rem 1.2rem;
+  background: rgb(245 246 241 / 0.94);
+  border: 1px solid var(--ink);
+  outline: 1px solid var(--ink);
+  outline-offset: 4px;
+}
+.cartouche__kicker {
+  font: 600 0.8125rem var(--font-body);
+  color: var(--magenta);
+}
+.cartouche__title {
+  margin-top: 0.35rem;
+  font-size: clamp(2.4rem, 1.6rem + 3.4vw, 4.1rem);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+}
+.cartouche__sub {
+  margin-top: 0.75rem;
+  font-size: 1.125rem;
+  line-height: 1.4;
+}
+.cartouche__by {
+  margin-top: 0.6rem;
+  font: 500 0.875rem var(--font-body);
+  color: var(--ink-soft);
+}
+.cartouche__notes {
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--ink);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.35rem 1.2rem;
+  font: 0.875rem/1.35 var(--font-body);
+}
+.cartouche__notes div {
+  display: flex;
+  gap: 0.5rem;
+}
+.cartouche__notes dt {
+  font-weight: 600;
+  min-width: 3.4rem;
+}
+.cartouche__notes dd {
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 640px) {
+  .hero__chart {
+    height: 30rem;
+    min-height: 0;
+  }
+  .cartouche {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: auto;
+    margin: -5rem 1rem 1.5rem;
+  }
+}
+
+/* ---------- reading ---------- */
+.intro {
+  padding: clamp(3rem, 8vw, 5.5rem) 0 2rem;
+}
+.intro__lede {
+  font-size: 1.4rem;
+  line-height: 1.5;
+}
+.intro__chart-note {
+  font: 0.9375rem/1.55 var(--font-body);
+  color: var(--ink-soft);
+  padding-left: 1rem;
+  border-left: 2px solid var(--magenta);
+}
+.post section {
+  scroll-margin-top: 1rem;
+}
+.watches,
+.sheet,
+.sails,
+.bosun,
+.orders {
+  padding: clamp(3rem, 8vw, 5rem) 0;
+}
+
+/* ---------- the watch dial ---------- */
+.watch {
+  width: min(100% - 2 * var(--gutter), 62rem);
+  margin: 2rem auto 0;
+  display: grid;
+  grid-template-columns: minmax(16rem, 21rem) 1fr;
+  grid-template-areas: 'dial key' 'dial mine';
+  gap: 1.5rem 3rem;
+  align-items: start;
+}
+.watch__dial {
+  grid-area: dial;
+  width: 100%;
+  height: auto;
+}
+.watch__face {
+  fill: #fff;
+  stroke: var(--rule);
+}
+.watch__arc {
+  stroke: #fff;
+  stroke-width: 1;
+  transition: opacity 0.2s;
+}
+.watch__arc--mine {
+  fill: var(--red);
+}
+.watch__arc--journal {
+  fill: var(--navy);
+}
+.watch__arc--third {
+  fill: #9fb3cf;
+}
+.watch__arc--dim {
+  opacity: 0.18;
+}
+.watch__tick {
+  stroke: var(--ink);
+  stroke-opacity: 0.5;
+}
+.watch__hour {
+  font: 600 15px var(--font-body);
+  fill: var(--ink);
+}
+.watch__entry {
+  stroke: var(--red);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+.watch__centre {
+  font: italic 500 20px var(--font-display);
+  fill: var(--ink);
+}
+.watch__centre--small {
+  font: 500 12px var(--font-body);
+  fill: var(--ink-soft);
+}
+.watch__key {
+  grid-area: key;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+}
+.watch__key ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+.watch__keybtn {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.65rem;
+  width: 100%;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+.watch__keybtn:hover,
+.watch__keybtn[aria-pressed='true'] {
+  border-color: var(--rule);
+  background: #fff;
+}
+.watch__swatch {
+  grid-row: span 2;
+  width: 0.9rem;
+  height: 0.9rem;
+  margin-top: 0.25rem;
+  border-radius: 2px;
+}
+.watch__keybtn--mine .watch__swatch {
+  background: var(--red);
+}
+.watch__keybtn--journal .watch__swatch {
+  background: var(--navy);
+}
+.watch__keybtn--third .watch__swatch {
+  background: #9fb3cf;
+}
+.watch__hours {
+  font-weight: 400;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+.watch__note {
+  margin-top: 0.75rem;
+  color: var(--ink-soft);
+}
+.watch__mine {
+  grid-area: mine;
+}
+.watch__mine h3 {
+  font: 600 0.9375rem var(--font-body);
+  margin-bottom: 0.4rem;
+}
+.watch__mine ol {
+  list-style: none;
+  padding: 0;
+  font: 0.875rem/1.4 var(--font-body);
+  columns: 2 15rem;
+  column-gap: 2rem;
+}
+.watch__mine li {
+  display: grid;
+  grid-template-columns: 5.6rem 1fr;
+  gap: 0.5rem;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid var(--rule);
+  break-inside: avoid;
+}
+.watch__mine time {
+  color: var(--red);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 760px) {
+  .watch {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'dial' 'key' 'mine';
+  }
+  .watch__dial {
+    max-width: 20rem;
+    margin-inline: auto;
+  }
+}
+
+/* ---------- day by day: the chart follows the boat beside the log ---------- */
+.days {
+  padding-top: clamp(3rem, 8vw, 5rem);
+  border-top: 1px solid var(--rule);
+}
+.days__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 36rem) minmax(0, 1fr);
+  grid-template-areas: 'text chart';
+  column-gap: clamp(2rem, 4vw, 4rem);
+  padding-left: max(var(--gutter), (100vw - 84rem) / 2);
+  margin-top: 2rem;
+}
+.days__text {
+  grid-area: text;
+  padding-bottom: 30vh;
+}
+.days__chart {
+  grid-area: chart;
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  border-left: 1px solid var(--rule);
+}
+.follow {
+  height: 100%;
+}
+.day {
+  padding: 3rem 0 4rem;
+  border-top: 1px solid var(--rule);
+}
+.day:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+.day__when {
+  font: 500 0.9375rem var(--font-body);
+  color: var(--ink-soft);
+}
+.day__n {
+  color: var(--magenta);
+  font-weight: 700;
+  margin-right: 0.35rem;
+}
+.day__title {
+  margin-top: 0.2rem;
+  font-size: clamp(1.7rem, 1.3rem + 1.4vw, 2.2rem);
+  font-weight: 500;
+  line-height: 1.12;
+}
+.day__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.1rem;
+  margin-top: 0.6rem;
+  font: 500 0.875rem var(--font-body);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-soft);
+}
+.day__p {
+  margin-top: 1.1rem;
+}
+.day__events {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.5rem;
+  font: 0.875rem/1.4 var(--font-body);
+}
+.day__event {
+  display: grid;
+  grid-template-columns: 4.6rem 3rem 1fr;
+  gap: 0.6rem;
+  padding: 0.35rem 0;
+  border-top: 1px dotted rgb(19 40 79 / 0.25);
+}
+.day__kind {
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding-top: 0.1rem;
+}
+.day__event--wildlife .day__kind {
+  color: #1f7a6b;
+}
+.day__event--gear .day__kind {
+  color: var(--red);
+}
+.day__event--galley .day__kind {
+  color: #8a6a2a;
+}
+.day__event--harbour .day__kind {
+  color: var(--navy);
+}
+.day__event--sailing .day__kind {
+  color: var(--magenta);
+}
+.day__time {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+.day__event:not(:has(.day__time)) span:last-child {
+  grid-column: 2 / -1;
+}
+
+/* a strip of the log, ruled like its page */
+.extract {
+  width: 100%;
+  margin-top: 1.4rem;
+  border-collapse: collapse;
+  font: 0.8125rem/1.3 var(--font-body);
+  font-variant-numeric: tabular-nums;
+  background:
+    linear-gradient(90deg, transparent 3.4rem, rgb(206 68 39 / 0.5) 3.4rem, rgb(206 68 39 / 0.5) calc(3.4rem + 1px), transparent calc(3.4rem + 1px)),
+    #fff;
+  box-shadow: 0 0 0 1px var(--rule);
+}
+.extract th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--ink-soft);
+  padding: 0.45rem 0.5rem;
+  border-bottom: 1px solid rgb(0 68 150 / 0.35);
+  white-space: nowrap;
+}
+.extract td {
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid rgb(0 68 150 / 0.14);
+  vertical-align: top;
+}
+.extract td:nth-child(-n + 5) {
+  white-space: nowrap;
+}
+.extract td:last-child {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.9375rem;
+}
+
+/* the log line under the pointer, on the chart */
+.fixcard {
+  position: absolute;
+  right: 0.75rem;
+  top: 0.75rem;
+  width: 15rem;
+  padding: 0.7rem 0.85rem;
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--rule), 0 6px 18px rgb(19 40 79 / 0.12);
+  font: 0.8125rem/1.4 var(--font-body);
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+.fixcard__when {
+  color: var(--ink-soft);
+}
+.fixcard__pos {
+  font-weight: 650;
+  font-size: 0.9375rem;
+}
+.fixcard__data {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.8rem;
+}
+.fixcard__remark {
+  margin-top: 0.3rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.9375rem;
+}
+
+@media (max-width: 960px) {
+  .days__layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'chart' 'text';
+    padding-inline: 0;
+  }
+  .days__chart {
+    z-index: 5;
+    height: 42svh;
+    border-left: 0;
+    border-block: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .days__text {
+    width: min(100% - 2 * var(--gutter), var(--measure));
+    margin-inline: auto;
+  }
+  .fixcard {
+    display: none;
+  }
+  .extract th:nth-child(3),
+  .extract td:nth-child(3) {
+    display: none;
+  }
+}
+@media (max-width: 520px) {
+  .extract th:nth-child(4),
+  .extract td:nth-child(4),
+  .extract th:nth-child(5),
+  .extract td:nth-child(5) {
+    display: none;
+  }
+}
+
+/* ---------- the barograph sheet ---------- */
+.sheet {
+  border-top: 1px solid var(--rule);
+}
+.baro {
+  width: min(100% - 2 * var(--gutter), 80rem);
+  margin: 2rem auto 0;
+}
+.baro__plot {
+  background:
+    repeating-linear-gradient(90deg, rgb(163 22 110 / 0.06) 0 1px, transparent 1px 24px),
+    repeating-linear-gradient(0deg, rgb(163 22 110 / 0.06) 0 1px, transparent 1px 24px),
+    #fff;
+  box-shadow: 0 0 0 1px var(--rule);
+  cursor: crosshair;
+  touch-action: pan-y;
+}
+.baro__plot svg {
+  display: block;
+}
+.baro__day {
+  fill: rgb(19 40 79 / 0.035);
+}
+.baro__daylabel,
+.baro__tick,
+.baro__unit,
+.baro__bandlabel,
+.baro__portlabel,
+.baro__oddlabel {
+  font: 500 11px var(--font-body);
+  fill: var(--ink-soft);
+}
+.baro__portlabel {
+  font-weight: 650;
+  fill: var(--ink);
+}
+.baro__port {
+  fill: url(#none);
+  fill: rgb(236 220 171 / 0.55);
+}
+.baro__rule {
+  stroke: var(--ink);
+  stroke-opacity: 0.1;
+}
+.baro__trace {
+  fill: none;
+  stroke: var(--magenta);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+.baro__reading {
+  fill: var(--magenta);
+}
+.baro__odd {
+  fill: #fff;
+  stroke: var(--magenta);
+  stroke-width: 1.5;
+  stroke-dasharray: 2 2;
+}
+.baro__band {
+  shape-rendering: crispEdges;
+}
+.baro__main--full {
+  fill: var(--navy);
+}
+.baro__main--reef1 {
+  fill: #3a6fb0;
+}
+.baro__main--reef2 {
+  fill: #6f97c8;
+}
+.baro__main--reef3 {
+  fill: #a8c1de;
+}
+.baro__main--trysail {
+  fill: var(--red);
+}
+.baro__main--none,
+.baro__jib--none,
+.baro__engine--off {
+  fill: rgb(19 40 79 / 0.06);
+}
+.baro__jib--full {
+  fill: var(--navy);
+}
+.baro__jib--reefed {
+  fill: #6f97c8;
+}
+.baro__jib--furled {
+  fill: #c9d6e6;
+}
+.baro__engine--on {
+  fill: var(--pencil);
+}
+.baro__cursor {
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.baro__plot:focus-visible {
+  outline: 2px solid var(--magenta);
+  outline-offset: 3px;
+}
+.baro__read {
+  display: grid;
+  gap: 0.2rem;
+  min-height: 5.2rem;
+  margin-top: 0.9rem;
+  padding: 0.8rem 1rem;
+  border-left: 3px solid var(--magenta);
+  background: #fff;
+  font: 0.9375rem/1.4 var(--font-body);
+  font-variant-numeric: tabular-nums;
+}
+.baro__when {
+  font-weight: 650;
+}
+.baro__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 1.1rem;
+  color: var(--ink-soft);
+}
+.baro__remark {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.0625rem;
+}
+@media (max-width: 760px) {
+  .baro__plot {
+    overflow-x: auto;
+  }
+}
+
+/* ---------- what was up ---------- */
+.sails {
+  border-top: 1px solid var(--rule);
+}
+.wardrobe {
+  width: min(100% - 2 * var(--gutter), 62rem);
+  margin: 2rem auto 0;
+}
+.wardrobe__plans {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1rem;
+}
+.wardrobe__plan {
+  display: grid;
+  gap: 0.35rem;
+  font-family: var(--font-body);
+}
+.rig {
+  width: 100%;
+  height: auto;
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--rule);
+}
+.rig__sea {
+  fill: none;
+  stroke: #3a7bb5;
+  stroke-opacity: 0.5;
+}
+.rig__hull {
+  fill: var(--ink);
+}
+.rig__mast,
+.rig__boom {
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+.rig__main {
+  fill: var(--navy);
+  fill-opacity: 0.85;
+}
+.rig__main--trysail {
+  fill: var(--red);
+}
+.rig__reef {
+  stroke: #fff;
+  stroke-dasharray: 2 2;
+}
+.wardrobe__label {
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+.wardrobe__bar {
+  display: block;
+  height: 6px;
+  background: var(--magenta);
+  min-inline-size: 2px;
+}
+.wardrobe__hours {
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+.wardrobe__engine {
+  margin-top: 2rem;
+  max-width: var(--measure);
+}
+.wardrobe__split {
+  display: flex;
+  height: 14px;
+  margin-top: 0.7rem;
+  box-shadow: 0 0 0 1px var(--rule);
+}
+.wardrobe__split-on {
+  background: var(--pencil);
+}
+.wardrobe__split-off {
+  background: var(--navy);
+}
+@media (max-width: 700px) {
+  .wardrobe__plans {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ---------- the bosun's list ---------- */
+.bosun {
+  border-top: 1px solid var(--rule);
+}
+.bosun__list {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.5rem;
+}
+.bosun__item {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  gap: 0.2rem 1rem;
+  padding: 0.9rem 0;
+  border-top: 1px solid var(--rule);
+}
+.bosun__day {
+  grid-row: span 2;
+  font: 650 0.875rem var(--font-body);
+  color: var(--red);
+  padding-top: 0.2rem;
+}
+.bosun__what {
+  font-size: 1.125rem;
+}
+.bosun__fix {
+  font: 0.9375rem/1.45 var(--font-body);
+  color: var(--ink-soft);
+}
+
+/* ---------- standing orders: the first page of the log ---------- */
+.orders__page {
+  width: min(100% - 2 * var(--gutter), 40rem);
+  margin-inline: auto;
+  /* one rule per line of writing: 1.75rem lines, each ruled just under its baseline */
+  padding: 1.75rem 2rem 1.75rem 4.2rem;
+  background:
+    linear-gradient(90deg, transparent 3rem, rgb(206 68 39 / 0.55) 3rem, rgb(206 68 39 / 0.55) calc(3rem + 1px), transparent calc(3rem + 1px)),
+    repeating-linear-gradient(180deg, transparent 0 calc(1.75rem - 1px), rgb(0 68 150 / 0.16) calc(1.75rem - 1px) 1.75rem),
+    #fff;
+  background-position: 0 0, 0 1.45rem;
+  box-shadow: 0 0 0 1px var(--rule), 0 10px 30px rgb(19 40 79 / 0.08);
+  transform: rotate(-0.6deg);
+}
+.orders__title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.75rem;
+  text-decoration: underline double;
+  text-underline-offset: 5px;
+}
+.orders__source {
+  font: 0.875rem/1.75rem var(--font-body);
+  color: var(--ink-soft);
+}
+.orders ol {
+  margin-top: 1.75rem;
+  padding-left: 1.3rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  .orders__page {
+    transform: none;
+  }
+}
+
+/* ---------- landfall ---------- */
+.landfall {
+  padding: clamp(3rem, 8vw, 5rem) 0 clamp(4rem, 10vw, 7rem);
+  border-top: 1px solid var(--rule);
+}
+.landfall__cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  margin-top: 1.6rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--night);
+  font: 650 1rem var(--font-body);
+  text-decoration: none;
+}
+.landfall__cta:hover {
+  background: #ffd84a;
+}
+
+/* ---------- blog index ---------- */
+.bi {
+  width: min(100% - 2 * var(--gutter), 72rem);
+  margin-inline: auto;
+  padding: clamp(3rem, 8vw, 5rem) 0 clamp(4rem, 10vw, 6rem);
+}
+.bi__title {
+  font-size: clamp(2.6rem, 1.8rem + 3vw, 4rem);
+  font-weight: 500;
+  line-height: 1;
+}
+.bi__sub {
+  margin-top: 0.7rem;
+  font-size: 1.2rem;
+  color: var(--ink-soft);
+}
+.bi__posts {
+  list-style: none;
+  padding: 0;
+  margin-top: 2.5rem;
+}
+.bi__link {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 0;
+  text-decoration: none;
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--rule);
+  transition: box-shadow 0.2s;
+}
+.bi__link:hover {
+  box-shadow: 0 0 0 1px var(--ink), 0 10px 30px rgb(19 40 79 / 0.1);
+}
+.bi__chart {
+  aspect-ratio: 10 / 9;
+}
+.bi__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  align-self: center;
+}
+.bi__date {
+  font: 500 0.875rem var(--font-body);
+  color: var(--magenta);
+}
+.bi__post-title {
+  font-size: clamp(2rem, 1.5rem + 2vw, 2.8rem);
+  font-weight: 500;
+  line-height: 1.05;
+}
+.bi__summary {
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+@media (max-width: 760px) {
+  .bi__link {
+    grid-template-columns: 1fr;
+  }
+}

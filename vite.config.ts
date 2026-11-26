@@ -26,8 +26,20 @@ function calendarFeed(): Plugin {
   };
 }
 
+/** The pages of the site: the club's one-page site, and the sailing blog (an index and its posts). */
+const page = (path: string) => decodeURIComponent(new URL(path, import.meta.url).pathname);
+
 export default defineConfig({
   // relative links, so the same build works on GitHub Pages (/tise-website/) and on the club's own domain
   base: './',
   plugins: [react(), calendarFeed()],
+  build: {
+    rolldownOptions: {
+      input: {
+        main: page('./index.html'),
+        blog: page('./sailing-blogs/index.html'),
+        atlantic: page('./sailing-blogs/gibraltar-to-las-palmas/index.html'),
+      },
+    },
+  },
 });
