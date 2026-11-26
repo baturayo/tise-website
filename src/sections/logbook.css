@@ -1,0 +1,83 @@
+/* The sailing blog on the landing page, between the voyage and the harbour, in the voyage's closing blue. */
+.logbook {
+  position: relative;
+  padding: clamp(4rem, 10vh, 6.5rem) 0 clamp(3rem, 8vh, 5rem);
+  background: #161d38;
+}
+.logbook__inner {
+  display: grid;
+  gap: 2.5rem clamp(2.5rem, 6vw, 5rem);
+  align-items: start;
+}
+@media (min-width: 1000px) {
+  .logbook__inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 36rem);
+  }
+}
+.logbook h2 {
+  font-size: var(--step-3);
+  color: #fff;
+}
+.logbook__intro > p {
+  margin-top: 1rem;
+  max-width: 34rem;
+  font-size: var(--step-1);
+  line-height: 1.55;
+  color: rgb(255 255 255 / 0.88);
+}
+.logbook__intro .btn {
+  margin-top: 1.75rem;
+}
+.logbook__posts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.5rem;
+}
+.logbook__post {
+  display: grid;
+  gap: 0.45rem;
+  color: var(--foam);
+  text-decoration: none;
+}
+.logbook__photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1200 / 630;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 0.6rem;
+  background: rgb(255 255 255 / 0.06);
+}
+.logbook__meta {
+  font-size: 0.875rem;
+  color: var(--mist);
+}
+.logbook__title {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  line-height: 1.15;
+  color: #fff;
+}
+.logbook__summary {
+  line-height: 1.55;
+  color: rgb(255 255 255 / 0.82);
+}
+.logbook__more {
+  margin-top: 0.3rem;
+  font-weight: 600;
+  color: var(--gold);
+}
+.logbook__post:hover .logbook__title,
+.logbook__post:focus-visible .logbook__title {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+.logbook__post:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 6px;
+  border-radius: 4px;
+}

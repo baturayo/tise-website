@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { posts } from './blog/data/posts';
+import { publicUrl } from './lib/paths';
 import { injectRoot, pages } from './prerender';
 
 describe('the pages, rendered at build time', () => {
@@ -14,6 +15,15 @@ describe('the pages, rendered at build time', () => {
       expect(html, page.file).toContain(headline[page.file]);
       expect(html.length, page.file).toBeGreaterThan(5000);
     }
+  });
+
+  it('show the newest blog posts on the club’s landing page, linked', () => {
+    const landing = pages.find((p) => p.file === 'index.html')!.render();
+    for (const p of posts.slice(0, 3)) {
+      expect(landing).toContain(`href="${publicUrl(`/sailing-blogs/${p.slug}/`)}"`);
+      expect(landing).toContain(p.title);
+    }
+    expect(landing).toContain(`href="${publicUrl('/sailing-blogs/')}"`);
   });
 
   it('include every post on the blog', () => {

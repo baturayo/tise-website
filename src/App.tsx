@@ -7,6 +7,7 @@ import { Hero } from './sections/Hero';
 import { Cabin } from './sections/Cabin';
 import { Voyage } from './sections/Voyage';
 import { Harbour } from './sections/Harbour';
+import { Logbook } from './sections/Logbook';
 import { Footer } from './sections/Footer';
 import './styles/chrome.css';
 
@@ -62,6 +63,7 @@ export function App() {
         <Hero today={today} motion={!reduced} />
         <Cabin />
         <Voyage today={today} motion={!reduced} />
+        <Logbook />
         <Harbour />
       </main>
       <Footer />

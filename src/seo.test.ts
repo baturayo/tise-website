@@ -57,6 +57,8 @@ describe('each blog post', () => {
         mainEntityOfPage: `${site}/sailing-blogs/${p.slug}/`,
       });
       expect(meta(html, 'property', 'article:published_time')).toBe(p.published);
+      // the landing page shows the same picture, from the same place
+      expect(meta(html, 'property', 'og:image')).toBe(`${site}/sailing-blogs/${p.slug}/og.jpg`);
     });
   }
 });

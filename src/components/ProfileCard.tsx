@@ -23,15 +23,20 @@ interface ProfileCardProps {
 
 /**
  * A photo that turns over, like a card, to a page from the ship's log about that person. Pointing at it
- * turns it on screens with a mouse; the button turns it everywhere else, and from the keyboard.
+ * turns it on screens with a mouse; on touch screens a tap on the card turns it, and the button turns it
+ * everywhere, from the keyboard too.
  */
 export function ProfileCard({ name, callName, role, years, bio, heading, halfMast = false, className, children }: ProfileCardProps) {
   const [turned, setTurned] = useState(false);
   const id = useId();
   const letters = signalLetters(callName);
+  // on a touch screen the whole card turns at a tap; with a mouse, pointing at it already does
+  const tap = () => {
+    if (!window.matchMedia('(hover: hover)').matches) setTurned((t) => !t);
+  };
   return (
     <div className={`card${className ? ` ${className}` : ''}`} data-turned={turned ? '' : undefined}>
-      <div className="card__inner">
+      <div className="card__inner" onClick={tap}>
         <div className="card__front">{children}</div>
         <div className="card__back" id={`${id}-log`}>
           {/* the first name hoisted in code flags down the margin of the page, read from the top */}
