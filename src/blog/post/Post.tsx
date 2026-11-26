@@ -1,5 +1,6 @@
 import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { ScrollTrigger, useReducedMotion } from '../../hooks/motion';
+import { useCountWhenSeen } from '../../hooks/useCountWhenSeen';
 import { formatCoords } from '../../lib/geo';
 import { Barograph } from '../components/Barograph';
 import { BlogFooter, BlogHeader, PostNav } from '../components/BlogChrome';
@@ -133,6 +134,9 @@ export function Post() {
   const length = useMemo(() => trackLength(track), [track]);
   const follow = useRef<ChartControls>(null);
   const daysRef = useRef<HTMLDivElement>(null);
+  // a read, not just a visit: counted when the reader gets to the landfall
+  const endRef = useRef<HTMLElement>(null);
+  useCountWhenSeen(endRef, `read-to-the-end/${SLUG}`, 'Read to the end: Gibraltar to Las Palmas');
   const [fix, setFix] = useState<LogEntry | null>(null);
 
   const departure = ports[0].leave!;
@@ -435,7 +439,7 @@ export function Post() {
           </div>
         </section>
 
-        <section className="landfall wrap-text" aria-labelledby="landfall-title">
+        <section ref={endRef} className="landfall wrap-text" aria-labelledby="landfall-title">
           <h2 id="landfall-title" className="section-title">
             Landfall
           </h2>

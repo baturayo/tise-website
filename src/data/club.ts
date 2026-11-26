@@ -70,7 +70,7 @@ export const crewMembers: CrewMember[] = [
     role: 'President',
     founder: true,
     photo: '/crew/serdar.jpg',
-    bio: "President and founding member of TISE Sailing Club. Serdar started his sailing adventure on Lac Léman in Geneva in 2001, and has since sailed with his TISE friends and family, mostly in the North Sea and the Mediterranean. He holds an RYA skipper licence and skippers most of TISE's sailing activities. He lives and works in Brussels.",
+    bio: "President and founding member of TISE Sailing Club, Serdar started his sailing adventure on Lake Geneva in 2001. He has been the club's skipper since the beginning of the club with sailing adventures mostly in the North Sea and the Mediterranean with family and TISE friends. An RYA-certified skipper, he loves sharing his passion for the sea, welcoming new sailors and bringing people together through sailing. An international CFO and now an entrepreneur, he lives and works in Brussels.",
   },
   {
     name: 'Özlem',
@@ -99,7 +99,12 @@ export const crewMembers: CrewMember[] = [
     photo: '/crew/sezen.jpg',
     bio: "Sezen started sailing in 2022 as a beginner at Fenerbahçe Doğuş Sailing Club in Istanbul. She later joined Tüpraş's corporate sailing team, competing in regattas across Turkish waters for a year aboard a MAT 10.10 yacht in the IRC 2 class. Based in Brussels, she enjoys sailing and exploring destinations with beautiful nature and turquoise waters. She is keen to build on her experience, develop her sailing skills, and make sailing a regular part of her future adventures.",
   },
-  { name: 'Yeter', fullName: 'Yeter Gökburun Bilgiç', photo: '/crew/yeter.jpg' },
+  {
+    name: 'Yeter',
+    fullName: 'Yeter Gökburun Bilgiç',
+    photo: '/crew/yeter.jpg',
+    bio: 'Yeter started her sailing adventure with TISE Sailing Club and quickly developed a passion for sailing life. With her high energy, enthusiasm and positive spirit, she actively supports every task on board, with anchoring in all conditions being her expertise. She adores the Mediterranean and sharing sailing adventures with family and friends. A medical doctor by profession, she lives and works in Brussels.',
+  },
   {
     name: 'Özge',
     fullName: 'Özge Bozal',

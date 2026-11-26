@@ -4,6 +4,7 @@ import { posts } from './src/blog/data/posts';
 import { events2027 } from './src/data/calendar';
 import { club } from './src/data/club';
 import { buildICS } from './src/lib/ics';
+import { GOATCOUNTER_CODE, withAnalytics } from './src/lib/analytics';
 import { buildSitemap, sitePages } from './src/lib/sitemap';
 
 /** Generates the subscribable calendar feed (/calendar.ics) from src/data/calendar.ts. */
@@ -45,13 +46,18 @@ function sitemap(): Plugin {
   };
 }
 
+/** Adds the visitor counter (src/lib/analytics.ts) to every page of the built site; not in development. */
+function analytics(): Plugin {
+  return { name: 'tise-analytics', apply: 'build', transformIndexHtml: (html) => withAnalytics(html, GOATCOUNTER_CODE) };
+}
+
 /** The pages of the site: the club's one-page site, and the sailing blog (an index and its posts). */
 const page = (path: string) => decodeURIComponent(new URL(path, import.meta.url).pathname);
 
 export default defineConfig({
   // relative links, so the same build works on GitHub Pages (/tise-website/) and on the club's own domain
   base: './',
-  plugins: [react(), calendarFeed(), sitemap()],
+  plugins: [react(), calendarFeed(), sitemap(), analytics()],
   build: {
     rolldownOptions: {
       input: {
